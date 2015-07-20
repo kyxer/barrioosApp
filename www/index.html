@@ -1,42 +1,274 @@
 <!DOCTYPE html>
-<!--
-    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
-
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
     <head>
         <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
+       <!-- <meta name="format-detection" content="telephone=no" /> -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="msapplication-tap-highlight" content="no">
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <!--<link rel="stylesheet" type="text/css" href="css/chui-android-3.8.10.min.css" />-->
+        <link rel="stylesheet" type="text/css" href="css/chui-ios-3.8.10.min.css">
+        <link rel="stylesheet" type="text/css" href="css/themeIos.css" />
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <script src="js/chui-3.8.10.min.js"></script>
+
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
+
+        <title>BarrioOS</title>
+        <style type="text/css" media="all">
+            /* Set background color for invalid inputs: */
+           /* input:focus:invalid {
+                background-color: rgba(225,0,0,0.05);
+            }
+            .horizontal.centered {
+                margin-top: 20px;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-orientation: horizontal;
+                -webkit-flex-direction: row;
+                -ms-flex-direction: row;
+                flex-direction: row;
+                -wekbit-box-pack: center;
+                -wekbit-justify-content: center;
+                -ms-justify-content: center;
+                justify-content: center;
+            }
+            button {
+                display: inline-block;
+                margin: auto;
+                width: auto;
+            }*/
+
+            /* Set background color for invalid inputs: */
+            input:focus:invalid {
+                background-color: rgba(225,0,0,0.05);
+            }
+            .horizontal.centered {
+                margin-top: 20px;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-orientation: horizontal;
+                -webkit-flex-direction: row;
+                -ms-flex-direction: row;
+                flex-direction: row;
+                -wekbit-box-pack: center;
+                -wekbit-justify-content: center;
+                -ms-justify-content: center;
+                justify-content: center;
+            }
+            button {
+                display: inline-block;
+                margin: auto;
+                width: auto;
+            }
+        </style>
+        <style>
+            .col {
+                padding: 20px 10px;
+                border: solid 1px #ccc;
+                background-color: #fff;
+                color: #000;
+                padding: 10px;
+                text-align: center;
+            }
+            .col p {
+                margin: 0;
+            }
+            .fixed1 {
+                -webkit-box-flex: none;
+                -webkit-flex: none;
+                -ms-flex: none;
+                flex: none;
+                width: 400px;
+                background-color: #eee !important;
+            }
+            .fixed2 {
+                -webkit-box-flex: none;
+                -webkit-flex: none;
+                -ms-flex: none;
+                flex: none;
+                width: 300px;
+                background-color: #eee !important;
+            }
+
+            @media all and (max-width: 599px) {
+                .fixed1, .fixed2 {
+                    width: auto;
+                }
+            }
+            .isWindows .grid > .col > p {
+                color: #000 !important;
+            }
+            .isWindows h2 {
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+        </style>
+        <script>
+            $(function() {
+                $("#goTologin").on("singletap", function () {
+                    $.UIGoToArticle("#login");
+                });
+
+                $("#goToForgotPassword").on("singletap", function () {
+                    $.UIGoToArticle("#forgotPassword");
+                });
+
+                $("#goToSignup").on("singletap", function () {
+                    $.UIGoToArticle("#signup");
+                });
+            });
+        </script>
     </head>
     <body>
-        <div class="app">
-            <h1>BarriooOS</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+        <nav>
+        <h1>BarrioOS</h1>
+    </nav>
+        <article id="main" class="current">
+        <section>
+            <div class="grid center gutter-5">
+                <div class="col flex-8">
+
+                    <p>Bienvenidos a BarrioOS</p>
+
+                    <div class='horizontal centered' >
+                        <button id="goTologin">Iniciar Sesion</button>
+                    </div>
+
+                    <div class='horizontal centered'>
+                        <button id="goToSignup">Registrarse</button>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
+    </article>
+        <nav class="next">
+        <a href="#" class="button back">BarrioOS</a>
+        <h1>Iniciar Sesión</h1>
+    </nav>
+        <article id="login" class="next">
+        <section>
+            <h2>Inicia Sesión</h2>
+            <form>
+                <ul ui-implements='form' class='list'>
+                    <li class='comp'>
+                        <div>
+                            <label for="emailLogin">Correo:</label>
+                        </div>
+                        <aside>
+                            <input id="emailLogin" name="email" type="email" autocapitalize="off" autocorrect="off" required>
+                        </aside>
+                    </li>
+                    <li class='comp'>
+                        <div>
+                            <label for='passwordLogin'>Contraseña:</label>
+                        </div>
+                        <aside>
+                            <input id="passwordLogin" name="password" type="password" autocapitalize="off" autocorrect="off" required>
+                        </aside>
+                    </li>
+                </ul>
+            </form>
+            <div class='horizontal centered'>
+                <button id="loginSubmit" >Iniciar Sesión</button>
+                <button id="goToForgotPassword">¿Olvido su contraseña?</button>
+            </div>
+        </section>
+    </article>
+        <nav class="next">
+        <a href="#" class="button back">BarrioOS</a>
+        <h1>Registrarse</h1>
+    </nav>
+        <article id="signup" class="next">
+        <section>
+            <h2>Registrate</h2>
+            <ul class='list' ui-implements='form'>
+                <li class="comp">
+                    <div>
+                        <label for="nameSignup">Nombre de Pila:</label>
+                    </div>
+                    <aside>
+                        <input id="nameSignup" name="name" type="text" autocapitalize="words" autocorrect="off" required>
+                    </aside>
+                </li>
+                <li class="comp">
+                    <div>
+                        <label for="emailSignup">Correo:</label>
+                    </div>
+                    <aside>
+                        <input id="emailSignup" name="email" type="text" autocapitalize="off" autocorrect="off" required>
+                    </aside>
+                </li>
+                <li class="comp">
+                    <div>
+                        <label for="emailReSignup">Repita Correo:</label>
+                    </div>
+                    <aside>
+                        <input id="emailReSignup" name="email_confirmation" type="text" autocapitalize="off" autocorrect="off" required>
+                    </aside>
+                </li>
+                <li class='comp'>
+                    <div>
+                        <label for='passwordSignup'>Contraseña:</label>
+                    </div>
+                    <aside>
+                        <input id="passwordSignup" name="password" type="password" autocapitalize="off" autocorrect="off" required>
+                    </aside>
+                </li>
+                <li class='comp'>
+                    <div>
+                        <label for='passwordReSignup'>Repita Contraseña:</label>
+                    </div>
+                    <aside>
+                        <input id="passwordReSignup" name="password_confirmation" type="password" autocapitalize="off" autocorrect="off" required>
+                    </aside>
+                </li>
+                <li class='comp'>
+                    <div>
+                        <label for='postalCodeSignup'>Código Postal:</label>
+                    </div>
+                    <aside>
+                        <input id="postalCodeSignup" name="postal_code" type="text" autocapitalize="off" autocorrect="off" required>
+                    </aside>
+                </li>
+            </ul>
+
+            <ul class='list' ui-implements='form'>
+                <li>
+                    <p><small>Al hacer clic en Registrarse, aceptas los <a href="">términos y condiciones</a> y la <a href="">política de privacidad</a></small></p>
+                </li>
+            </ul>
+            <button class='action' id="submitRegistration">Registrarse</button>
+        </section>
+    </article>
+        <nav class="next">
+        <a href="#" class="button back">Iniciar Sessión</a>
+        <h1>Recuperar Contraseña</h1>
+    </nav>
+        <article id="forgotPassword" class="next">
+        <section>
+            <h2>Solicita tu contraseña</h2>
+            <form>
+                <ul ui-implements='form' class='list'>
+                    <li class='comp'>
+                        <div>
+                            <label for='emailRecover'>Correo:</label>
+                        </div>
+                        <aside>
+                            <input id="emailRecover" name="email" type="text" name="user.email" autocapitalize="off" autocorrect="off" required>
+                        </aside>
+                    </li>
+                </ul>
+                <div class='horizontal centered'>
+                    <button id="recoverSubmit" >Recuperar</button>
+                </div>
+            </form>
+        </section>
+    </article>
+
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
