@@ -12,8 +12,8 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <!--<link rel="stylesheet" type="text/css" href="css/chui-android-3.8.10.min.css" /> -->
         <link rel="stylesheet" type="text/css" href="css/themeAndroid.css" />
-        <!--<link rel="stylesheet" type="text/css" href="css/chui-ios-3.8.10.min.css">
-        <link rel="stylesheet" type="text/css" href="css/themeIos.css" /> -->
+        <!--<link rel="stylesheet" type="text/css" href="css/chui-ios-3.8.10.min.css"> -->
+        <!--<link rel="stylesheet" type="text/css" href="css/themeIos.css" /> -->
         <script src="js/jquery-2.1.4.min.js"></script>
         <script src="js/chui-3.8.10.min.js"></script>
 
@@ -47,8 +47,8 @@
         <style>
             .col {
                 padding: 20px 10px;
-                border: solid 1px #ccc;
-                background-color: #fff;
+                /*border: solid 1px #ccc;
+                background-color: #fff;*/
                 color: #000;
                 padding: 10px;
                 text-align: center;
@@ -85,9 +85,61 @@
                 margin-top: 20px;
                 margin-bottom: 20px;
             }
+
+        /*For raiting*/
+            .rating {
+
+                unicode-bidi: bidi-override;
+                direction: rtl;
+            }
+            .rating > span {
+                font: 30px Georgia, serif;
+                display: inline-block;
+                position: relative;
+                width: 1.1em;
+                color:gold;
+            }
+            .rating > span:before {
+                content: "\2605";
+                position: absolute;
+            }
+            /* Popup Demo Styles */
+            #popupMessageTarget {
+                opacity: 0;
+                font-size: 14pt;
+                line-height: 16pt;
+                font-weight: 200;
+                font-family: SegoeWP, SegoeUI, HelveticaNeue, Roboto, Sans-serif;
+                padding: 0 15px;
+            }
+            .animatePopupMessage {
+                -webkit-animation-duration: 2s;
+                -webkit-animation-timing-function: linear;
+                -webkit-animation-name: updatePopupMessage;
+                animation-duration: 2s;
+                animation-timing-function: linear;
+                animation-name: updatePopupMessage;
+            }
+            @-webkit-keyframes updatePopupMessage {
+                0% { opacity: 0; }
+                20% { opacity: 1; }
+                90% { opacity: 1; }
+                100% { opacity: 0; }
+            }
+
+            @keyframes updatePopupMessage {
+                0% { opacity: 0; }
+                20% { opacity: 1; }
+                90% { opacity: 1; }
+                100% { opacity: 0; }
+            }
         </style>
         <script>
             $(function() {
+
+                var optionsContent = "<ul class='list'><li id='gotToProfile' ><h3>Perfil</h3></li><li id='signOut'><h3>Cerrar Sesion</h3></li></ul>";
+
+
                 $("#goTologin").on("singletap", function () {
                     $.UIGoToArticle("#login");
                 });
@@ -99,6 +151,64 @@
                 $("#goToSignup").on("singletap", function () {
                     $.UIGoToArticle("#signup");
                 });
+
+                $("#goToDashboard").on("singletap", function () {
+                    $.UIGoToArticle("#dashboard");
+                });
+
+                // This is just an animation for popup callback,
+                // Not part of popup functionality.
+                $("#popupMessageTarget").on("webkitAnimationEnd", function() {
+                    this.className = "";
+                    this.textContent = "";
+                });
+
+                $("#openCodeBidi").on("singletap", function() {
+                    $.UIPopup({
+                        id: "warning",
+                        title: '',
+                        message: "<img title='Kiss' src='images/music/Kiss.jpg' height='280px'>",
+                        cancelButton: 'Salir',
+                        continueButton: '',
+                        callback: function() {
+                            var popupMessageTarget = document.querySelector('#popupMessageTarget');
+                            popupMessageTarget.textContent = 'Thanks for staying with us a bit longer.';
+                            popupMessageTarget.classList.remove("animatePopupMessage");
+                            popupMessageTarget.classList.add("animatePopupMessage");
+                        }
+                    });
+                });
+
+                var popoverEventHandler = function() {
+
+                    $("#gotToProfile").on("singletap", function () {
+                        $.UIGoToArticle("#profile");
+                    });
+
+                    $('.popover').on('singletap', function(e) {
+                        if ($.isAndroid || $.isChrome) {
+                            setTimeout(function() {
+                                $.UIPopoverClose();
+                            }, 300);
+                        } else {
+                            $.UIPopoverClose();
+                        }
+                    });
+                };
+
+                $('#showOptions').on('singletap', function() {
+                    var trigger = this;
+                    $.UIPopover({
+                        title: 'Opciones',
+                        trigger: trigger,
+                        content: optionsContent,
+                        callback: function() {
+                            popoverEventHandler();
+                        }
+                    });
+                });
+
+
             });
         </script>
     </head>
@@ -125,7 +235,7 @@
         </section>
     </article>
         <nav class="next">
-        <a href="#" class="button back">BarrioOS</a>
+        <button class="back">BarrioOS</button>
         <h1>Iniciar Sesión</h1>
     </nav>
         <article id="login" class="next">
@@ -152,101 +262,223 @@
                 </ul>
             </form>
             <div class='horizontal centered'>
-                <button id="loginSubmit" >Iniciar Sesión</button>
+                <button id="goToDashboard" >Iniciar Sesión</button>
                 <button id="goToForgotPassword">¿Olvido su contraseña?</button>
             </div>
         </section>
     </article>
         <nav class="next">
-            <a href="#" class="button back">BarrioOS</a>
+            <button class="back">BarrioOS</button>
             <h1>Registrarse</h1>
         </nav>
         <article id="signup" class="next">
             <section>
                 <h2>Registrate</h2>
                 <ul class='list' ui-implements='form'>
-                <li class="comp">
-                    <div>
-                        <label for="nameSignup">Nombre de Pila:</label>
-                    </div>
-                    <aside>
-                        <input id="nameSignup" name="name" type="text" autocapitalize="words" autocorrect="off" required>
-                    </aside>
-                </li>
-                <li class="comp">
-                    <div>
-                        <label for="emailSignup">Correo:</label>
-                    </div>
-                    <aside>
-                        <input id="emailSignup" name="email" type="text" autocapitalize="off" autocorrect="off" required>
-                    </aside>
-                </li>
-                <li class="comp">
-                    <div>
-                        <label for="emailReSignup">Repita Correo:</label>
-                    </div>
-                    <aside>
-                        <input id="emailReSignup" name="email_confirmation" type="text" autocapitalize="off" autocorrect="off" required>
-                    </aside>
-                </li>
-                <li class='comp'>
-                    <div>
-                        <label for='passwordSignup'>Contraseña:</label>
-                    </div>
-                    <aside>
-                        <input id="passwordSignup" name="password" type="password" autocapitalize="off" autocorrect="off" required>
-                    </aside>
-                </li>
-                <li class='comp'>
-                    <div>
-                        <label for='passwordReSignup'>Repita Contraseña:</label>
-                    </div>
-                    <aside>
-                        <input id="passwordReSignup" name="password_confirmation" type="password" autocapitalize="off" autocorrect="off" required>
-                    </aside>
-                </li>
-                <li class='comp'>
-                    <div>
-                        <label for='postalCodeSignup'>Código Postal:</label>
-                    </div>
-                    <aside>
-                        <input id="postalCodeSignup" name="postal_code" type="text" autocapitalize="off" autocorrect="off" required>
-                    </aside>
-                </li>
-            </ul>
+                    <li class="comp">
+                        <div>
+                            <label for="nameSignup">Nombre de Pila:</label>
+                        </div>
+                        <aside>
+                            <input id="nameSignup" name="name" type="text" autocapitalize="words" autocorrect="off" required>
+                        </aside>
+                    </li>
+                    <li class="comp">
+                        <div>
+                            <label for="emailSignup">Correo:</label>
+                        </div>
+                        <aside>
+                            <input id="emailSignup" name="email" type="text" autocapitalize="off" autocorrect="off" required>
+                        </aside>
+                    </li>
+                    <li class="comp">
+                        <div>
+                            <label for="emailReSignup">Repita Correo:</label>
+                        </div>
+                        <aside>
+                            <input id="emailReSignup" name="email_confirmation" type="text" autocapitalize="off" autocorrect="off" required>
+                        </aside>
+                    </li>
+                    <li class='comp'>
+                        <div>
+                            <label for='passwordSignup'>Contraseña:</label>
+                        </div>
+                        <aside>
+                            <input id="passwordSignup" name="password" type="password" autocapitalize="off" autocorrect="off" required>
+                        </aside>
+                    </li>
+                    <li class='comp'>
+                        <div>
+                            <label for='passwordReSignup'>Repita Contraseña:</label>
+                        </div>
+                        <aside>
+                            <input id="passwordReSignup" name="password_confirmation" type="password" autocapitalize="off" autocorrect="off" required>
+                        </aside>
+                    </li>
+                    <li class='comp'>
+                        <div>
+                            <label for='postalCodeSignup'>Código Postal:</label>
+                        </div>
+                        <aside>
+                            <input id="postalCodeSignup" name="postal_code" type="text" autocapitalize="off" autocorrect="off" required>
+                        </aside>
+                    </li>
+                </ul>
 
                 <ul class='list' ui-implements='form'>
-                <li>
-                    <p><small>Al hacer clic en Registrarse, aceptas los <a href="">términos y condiciones</a> y la <a href="">política de privacidad</a></small></p>
-                </li>
-            </ul>
+                    <li>
+                        <p><small>Al hacer clic en Registrarse, aceptas los <a href="">términos y condiciones</a> y la <a href="">política de privacidad</a></small></p>
+                    </li>
+                </ul>
                 <button class='action' id="submitRegistration">Registrarse</button>
         </section>
         </article>
         <nav class="next">
-            <a href="#" class="button back">Iniciar Sessión</a>
+            <button class="back">Iniciar Sessión</button>
             <h1>Recuperar Contraseña</h1>
         </nav>
         <article id="forgotPassword" class="next">
-        <section>
-            <h2>Solicita tu contraseña</h2>
-            <form>
-                <ul ui-implements='form' class='list'>
-                    <li class='comp'>
-                        <div>
-                            <label for='emailRecover'>Correo:</label>
-                        </div>
-                        <aside>
-                            <input id="emailRecover" name="email" type="text" name="user.email" autocapitalize="off" autocorrect="off" required>
-                        </aside>
-                    </li>
-                </ul>
-                <div class='horizontal centered'>
-                    <button id="recoverSubmit" >Recuperar</button>
+            <section>
+                <h2>Solicita tu contraseña</h2>
+                <form>
+                    <ul ui-implements='form' class='list'>
+                        <li class='comp'>
+                            <div>
+                                <label for='emailRecover'>Correo:</label>
+                            </div>
+                            <aside>
+                                <input id="emailRecover" name="email" type="text" name="user.email" autocapitalize="off" autocorrect="off" required>
+                            </aside>
+                        </li>
+                    </ul>
+                    <div class='horizontal centered'>
+                        <button id="recoverSubmit" >Recuperar</button>
+                    </div>
+                </form>
+            </section>
+        </article>
+
+        <nav class="next">
+            <h1>BarrioOS Inicio</h1>
+            <button class='show-popover button' id="showOptions">opciones</button>
+        </nav>
+        <article id="dashboard" class="next">
+            <section>
+                <div class="grid gutter-5">
+                    <div class="col flex-3">
+                        <p>Vecino de</p>
+                        <p>LA LATINA</p>
+                    </div>
+                    <div class="col flex-3">
+                        <p>BarrioOS</p>
+
+                    </div>
                 </div>
-            </form>
-        </section>
-    </article>
+                <div class="grid gutter-5">
+                    <p id='popupMessageTarget' class='attentionGrapper'></p>
+                    <div class="col flex-3">
+                        <img title='Kiss' src="images/music/Kiss.jpg" height="150px">
+                    </div>
+                    <div class="col flex-3">
+                        <div class="rating">
+                            <p>German Mendoza</p>
+                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                        </div>
+                        <br>
+                        <img id="openCodeBidi" title='Kiss' src="images/music/Kiss.jpg" height="80px">
+                    </div>
+                </div>
+            </section>
+        </article>
+        <nav class="next">
+            <button class='cancel'>Cancelar</button>
+            <h1>Perfil</h1>
+            <button class='done align-flush'>Guardar</button>
+        </nav>
+        <article id="profile" class="next">
+            <section>
+                <h2>Edita tu información</h2>
+                <form>
+                    <ul class='list' ui-implements='form'>
+                        <li class="comp">
+                            <div>
+                                <label for="firstNameUpdate">Nombre:</label>
+                            </div>
+                            <aside>
+                                <input id="firstNameUpdate" name="first_name" type="text" autocapitalize="words" autocorrect="off" required>
+                            </aside>
+                        </li>
+                        <li class="comp">
+                            <div>
+                                <label for="lastNameUpdate">Apellido:</label>
+                            </div>
+                            <aside>
+                                <input id="lastNameUpdate" name="last_name" type="text" autocapitalize="words" autocorrect="off" required>
+                            </aside>
+                        </li>
+                        <li class="comp">
+                            <div>
+                                <label for="emailUpdate">Correo:</label>
+                            </div>
+                            <aside>
+                                <input id="emailUpdate" name="email" type="text" autocapitalize="off" autocorrect="off" required>
+                            </aside>
+                        </li>
+                        <li class="comp">
+                            <div>
+                                <label for="emailReUpdate">Repita Correo:</label>
+                            </div>
+                            <aside>
+                                <input id="emailReUpdate" name="email_confirmation" type="text" autocapitalize="off" autocorrect="off" required>
+                            </aside>
+                        </li>
+                        <li class='comp'>
+                            <div>
+                                <label for='passwordUpdate'>Contraseña:</label>
+                            </div>
+                            <aside>
+                                <input id="passwordUpdate" name="password" type="password" autocapitalize="off" autocorrect="off" required>
+                            </aside>
+                        </li>
+                        <li class='comp'>
+                            <div>
+                                <label for='passwordReUpdate'>Repita Contraseña:</label>
+                            </div>
+                            <aside>
+                                <input id="passwordReUpdate" name="password_confirmation" type="password" autocapitalize="off" autocorrect="off" required>
+                            </aside>
+                        </li>
+                        <li class='comp'>
+                            <div>
+                                <label for='postalCodeUpdate'>Código Postal:</label>
+                            </div>
+                            <aside>
+                                <input id="postalCodeUpdate" name="postal_code" type="text" autocapitalize="off" autocorrect="off" required>
+                            </aside>
+                        </li>
+                    </ul>
+                    <br>
+                    <ul class='list' ui-implements='form'>
+                        <li class='comp'>
+                            <div>
+                                <label for='phoneUpdate'>Telefono:</label>
+                            </div>
+                            <aside>
+                                <input id="phoneUpdate" name="phone" type="text" autocapitalize="off" autocorrect="off" required>
+                            </aside>
+                        </li>
+                        <li class='comp'>
+                            <div>
+                                <label for='addressUpdate'>Direccion:</label>
+                            </div>
+                            <aside>
+                                <input id="addressUpdate" name="address" type="text" autocapitalize="off" autocorrect="off" required>
+                            </aside>
+                        </li>
+                    </ul>
+                </form>
+            </section>
+        </article>
 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>

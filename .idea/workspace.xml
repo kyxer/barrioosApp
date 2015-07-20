@@ -22,25 +22,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="6.5384617">
-              <caret line="161" column="32" selection-start-line="160" selection-start-column="12" selection-end-line="161" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.5055644">
+              <caret line="390" column="22" selection-start-line="390" selection-start-column="22" selection-end-line="390" selection-end-column="22" />
               <folding>
-                <element signature="n#ul#0;n#section#0;n#article#2;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#ul#1;n#section#0;n#article#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#article#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#article#3;n#body#0;n#html#0;n#!!top" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/www/config.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.2946299">
-              <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -60,10 +50,10 @@
       <list>
         <option value="$PROJECT_DIR$/www/js/jquery-2.14.min.js" />
         <option value="$PROJECT_DIR$/www/css/theme.css" />
-        <option value="$PROJECT_DIR$/www/css/themeIos.css" />
         <option value="$PROJECT_DIR$/config.xml" />
-        <option value="$PROJECT_DIR$/www/index.html" />
         <option value="$PROJECT_DIR$/www/config.xml" />
+        <option value="$PROJECT_DIR$/www/css/themeIos.css" />
+        <option value="$PROJECT_DIR$/www/index.html" />
       </list>
     </option>
   </component>
@@ -137,6 +127,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="barrioosApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="barrioosApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -146,6 +154,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../chui" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Projects/barrioosApp/www/res/screen/android/screen-ldpi-portrait.png" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -176,6 +185,9 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="38596426-9b42-48ca-bb68-f241a85d25ce" name="Default" comment="" />
@@ -222,8 +234,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#ul#0;n#section#0;n#article#2;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#ul#1;n#section#0;n#article#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#article#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#article#3;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -238,20 +250,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/spec/helper.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/jquery.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -304,27 +309,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/css/themeIos.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2520" column="1" selection-start-line="2520" selection-start-column="1" selection-end-line="2520" selection-end-column="1" />
-          <folding>
-            <element signature="e#6306#6842#2" expanded="false" />
-            <element signature="e#22642#23240#2" expanded="false" />
-            <element signature="e#23390#23985#2" expanded="false" />
-            <element signature="e#24278#24876#2" expanded="false" />
-            <element signature="e#25169#25768#2" expanded="false" />
-            <element signature="e#33276#34958#2" expanded="false" />
-            <element signature="e#39845#40603#2" expanded="false" />
-            <element signature="e#51667#52328#2" expanded="false" />
-            <element signature="e#53180#53822#2" expanded="false" />
-            <element signature="e#54162#54819#2" expanded="false" />
-            <element signature="e#57477#58274#2" expanded="false" />
-            <element signature="e#66846#67338#2" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/images/app-icons/weather.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -371,19 +355,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/spec.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.53846157">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/res/screen/android/screen-ldpi-portrait.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/res/screen/android/screen-ldpi-landscape.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -412,13 +383,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/index.html">
+    <entry file="file://$PROJECT_DIR$/www/res/screen/android/screen-ldpi-portrait.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/spec.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="6.5384617">
-          <caret line="161" column="32" selection-start-line="160" selection-start-column="12" selection-end-line="161" selection-end-column="32" />
+        <state vertical-scroll-proportion="11.115385">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/css/themeIos.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28447026">
+          <caret line="2493" column="7" selection-start-line="2493" selection-start-column="7" selection-end-line="2493" selection-end-column="7" />
           <folding>
-            <element signature="n#ul#0;n#section#0;n#article#2;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#ul#1;n#section#0;n#article#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="e#6306#6842#2" expanded="true" />
+            <element signature="e#22642#23240#2" expanded="true" />
+            <element signature="e#23390#23985#2" expanded="true" />
+            <element signature="e#24278#24876#2" expanded="true" />
+            <element signature="e#25169#25768#2" expanded="true" />
+            <element signature="e#33276#34958#2" expanded="true" />
+            <element signature="e#39845#40603#2" expanded="true" />
+            <element signature="e#51667#52328#2" expanded="true" />
+            <element signature="e#53180#53822#2" expanded="true" />
+            <element signature="e#54162#54819#2" expanded="true" />
+            <element signature="e#57477#58274#2" expanded="true" />
+            <element signature="e#66846#67338#2" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -428,6 +422,17 @@
         <state vertical-scroll-proportion="-1.2946299">
           <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5055644">
+          <caret line="390" column="22" selection-start-line="390" selection-start-column="22" selection-end-line="390" selection-end-column="22" />
+          <folding>
+            <element signature="n#article#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#article#3;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
