@@ -10,10 +10,6 @@
         <meta name="msapplication-tap-highlight" content="no">
 
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <!--<link rel="stylesheet" type="text/css" href="css/chui-android-3.8.10.min.css" /> -->
-        <!--<link rel="stylesheet" type="text/css" href="css/themeAndroid.css" /> -->
-        <!--<link rel="stylesheet" type="text/css" href="css/chui-ios-3.8.10.min.css"> -->
-        <!-- <link rel="stylesheet" type="text/css" href="css/themeIos.css" /> -->
         <script src="js/jquery-2.1.4.min.js"></script>
         <script src="js/chui-3.8.10.min.js"></script>
         <script src="js/jqrcode.min.js"></script>
@@ -139,12 +135,12 @@
                 color:darkred !important;
             }
 
-            .actionBtn{
+            .isAndroid .actionBtn{
                 background: #276527 !important;
                 color: whitesmoke !important;
             }
 
-            .secondBtn{
+            .isAndroid .secondBtn{
                 background: #3066a0 !important;
                 color: whitesmoke !important;
             }
@@ -279,7 +275,8 @@
                     setTimeout(function() {
                         $("body").fadeIn();
                     });
-                }else{
+                }
+                else{
                     $("head").append("<link rel='stylesheet' type='text/css' href='css/themeIos.css' />");
                     setTimeout(function() {
                         $("body").fadeIn();
@@ -307,7 +304,7 @@
                     {
                         setTimeout(function(){
                             var qrcode = new QRCode("containerCodeBidi", {
-                                text: "http://des.barrioosger.com/users/"+user.id,
+                                text: "http://www.proyectodes.net/users/"+user.id,
                                 width: 270,
                                 height: 270,
                                 colorDark : "#000000",
@@ -395,7 +392,7 @@
                 var doAjax = function(options){
                     var user = JSON.parse(window.localStorage.getItem('user'));
 
-                    var url = "http://des.barrioosger.com/api/";
+                    var url = "http://www.proyectodes.net/api/";
 
                     if(user){
                         $.ajaxSetup({
