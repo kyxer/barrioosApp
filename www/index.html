@@ -13,9 +13,10 @@
         <!--<link rel="stylesheet" type="text/css" href="css/chui-android-3.8.10.min.css" /> -->
         <link rel="stylesheet" type="text/css" href="css/themeAndroid.css" />
         <!--<link rel="stylesheet" type="text/css" href="css/chui-ios-3.8.10.min.css"> -->
-        <!--<link rel="stylesheet" type="text/css" href="css/themeIos.css" /> -->
+        <!--<link rel="stylesheet" type="text/css" href="css/themeIos.css" />-->
         <script src="js/jquery-2.1.4.min.js"></script>
         <script src="js/chui-3.8.10.min.js"></script>
+        <script src="js/jqrcode.min.js"></script>
 
         <!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" /> -->
         <title>BarrioOS</title>
@@ -133,28 +134,107 @@
                 90% { opacity: 1; }
                 100% { opacity: 0; }
             }
+
+            #containerCodeBidi{
+                text-align: center;
+                padding-left: 30%;
+            }
         </style>
         <script>
             $(function() {
-
+                var user = JSON.parse(window.localStorage.getItem('user'));
                 var optionsContent = "<ul class='list'><li id='gotToProfile' ><h3>Perfil</h3></li><li id='signOut'><h3>Cerrar Sesion</h3></li></ul>";
+                var dashBoarTemplate =
+                        '<section>' +
+                            '<div class="grid gutter-5">' +
+                                '<div class="col flex-3">' +
+                                    '<p>Vecino de</p>' +
+                                    '<p></p>' +
+                                '</div>' +
+                                '<div class="col flex-3">' +
+                                    '<p>BarrioOS</p>'+
+                                '</div>' +
+                            '</div>' +
+                            '<div class="grid gutter-5">' +
+                                '<p id="popupMessageTarget" class="attentionGrapper"></p>' +
+                                '<div class="col flex-3">' +
+                                    '<img title="[[= data.first_name  ]]" src="[[= data.avatar_standar  ]]" height="150px">'+
+                                '</div>' +
+                                '<div class="col flex-3">' +
+                                    '<div class="rating">' +
+                                        '<p>[[= data.first_name ]]</p>' +
+                                        '<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>' +
+                                    '</div>' +
+                                    '<br>' +
+                                    '<div id="containerCodeBidi"></div>'+
+                                '</div>' +
+                            '</div>' +
+                        '</section>';
+
+                var myDashboardTmpl = $.template(dashBoarTemplate);
+
+                var goToDashboard = function(){
+                    $.UIGoToArticle('#dashboard');
+                    $('#dashboard').html(myDashboardTmpl(user));
+                    var qrcode = new QRCode("containerCodeBidi", {
+                        text: user.id,
+                        width: 270,
+                        height: 270,
+                        colorDark : "#000000",
+                        colorLight : "#ffffff",
+                        correctLevel : QRCode.CorrectLevel.H
+                    });
+                    $('#containerCodeBidi img').attr({height:'80px'});
+
+                }
+
+                var doAjax = function(options){
+                    var user = JSON.parse(window.localStorage.getItem('user'));
+
+                    var url = "http://des.barrioosger.com/api/";
+                    if(user){
+                        $.ajaxSetup({
+                            headers: { 'Authorization': 'Bearer' + user.token }
+                        });
+                    }
+                    $.ajax({
+                        url: url + $('#'+ options.identifier).attr("action"),
+                        type: $('#'+ options.identifier).attr("method"),
+                        data: $('#'+ options.identifier).serialize(),
+                        beforeSend: options.beforeSend,
+                        success: options.success,
+                        error: options.error
+                    });
+                }
 
 
-                $("#goTologin").on("singletap", function () {
-                    $.UIGoToArticle("#login");
+                if(user){
+                    goToDashboard();
+                }
+
+                $("#executeLogin").on("singletap", function () {
+                    doAjax({
+                        identifier:"formLogin",
+                        beforeSend: function(){
+                            $.UIPopup({empty: true});
+                            $('.popup .panel').UIBusy({'color':'#1f344a', 'size': 80});
+                            $('.popup').find('.busy').UICenter('relative');
+
+                        },
+                        success:function(response){
+
+                            $('.popup').UIPopupClose();
+                            window.localStorage.setItem("user", JSON.stringify(response));
+                            goToDashboard();
+
+
+                        },
+                        error:function(response){
+                            $('.popup').UIPopupClose();
+                        }
+                    })
                 });
 
-                $("#goToForgotPassword").on("singletap", function () {
-                    $.UIGoToArticle("#forgotPassword");
-                });
-
-                $("#goToSignup").on("singletap", function () {
-                    $.UIGoToArticle("#signup");
-                });
-
-                $("#goToDashboard").on("singletap", function () {
-                    $.UIGoToArticle("#dashboard");
-                });
 
                 // This is just an animation for popup callback,
                 // Not part of popup functionality.
@@ -163,11 +243,13 @@
                     this.textContent = "";
                 });
 
-                $("#openCodeBidi").on("singletap", function() {
+                $("#containerCodeBidi").on("singletap", function() {
+
+                    var src = $('#containerCodeBidi img').attr('src');
                     $.UIPopup({
                         id: "warning",
-                        title: '',
-                        message: "<img title='Kiss' src='images/music/Kiss.jpg' height='280px'>",
+                        title: '<br>',
+                        message: "<img title='Kiss' src='"+src+"' height='270px'>",
                         cancelButton: 'Salir',
                         continueButton: '',
                         callback: function() {
@@ -183,6 +265,11 @@
 
                     $("#gotToProfile").on("singletap", function () {
                         $.UIGoToArticle("#profile");
+                    });
+
+                    $("#signOut").on("singletap", function(){
+                        window.localStorage.removeItem("user");
+                        $.UIGoBack("#login");
                     });
 
                     $('.popover').on('singletap', function(e) {
@@ -209,13 +296,34 @@
                 });
 
 
+                $("#goTologin").on("singletap", function () {
+                    $.UIGoToArticle("#login");
+                });
+
+                $("#goToForgotPassword").on("singletap", function () {
+                    $.UIGoToArticle("#forgotPassword");
+                });
+
+                $("#goToSignup").on("singletap", function () {
+                    $.UIGoToArticle("#signup");
+                });
+
+                $("#goToDashboard").on("singletap", function () {
+                    $.UIGoToArticle("#dashboard");
+                });
+
+                $("#cancelUpdate").on("singletap", function () {
+                    $.UIGoBack("#dashboard");
+                });
+
+
             });
         </script>
     </head>
     <body>
         <nav>
-        <h1>BarrioOS</h1>
-    </nav>
+            <h1>BarrioOS</h1>
+        </nav>
         <article id="main" class="current">
         <section>
             <div class="grid center gutter-5">
@@ -241,7 +349,7 @@
         <article id="login" class="next">
         <section>
             <h2>Inicia Sesión</h2>
-            <form>
+            <form id="formLogin" action="auth/login" method="POST" >
                 <ul ui-implements='form' class='list'>
                     <li class='comp'>
                         <div>
@@ -262,7 +370,7 @@
                 </ul>
             </form>
             <div class='horizontal centered'>
-                <button id="goToDashboard" >Iniciar Sesión</button>
+                <button id="executeLogin" >Iniciar Sesión</button>
                 <button id="goToForgotPassword">¿Olvido su contraseña?</button>
             </div>
         </section>
@@ -363,39 +471,14 @@
             <button class='show-popover button' id="showOptions">opciones</button>
         </nav>
         <article id="dashboard" class="next">
-            <section>
-                <div class="grid gutter-5">
-                    <div class="col flex-3">
-                        <p>Vecino de</p>
-                        <p>LA LATINA</p>
-                    </div>
-                    <div class="col flex-3">
-                        <p>BarrioOS</p>
 
-                    </div>
-                </div>
-                <div class="grid gutter-5">
-                    <p id='popupMessageTarget' class='attentionGrapper'></p>
-                    <div class="col flex-3">
-                        <img title='Kiss' src="images/music/Kiss.jpg" height="150px">
-                    </div>
-                    <div class="col flex-3">
-                        <div class="rating">
-                            <p>German Mendoza</p>
-                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                        </div>
-                        <br>
-                        <img id="openCodeBidi" title='Kiss' src="images/music/Kiss.jpg" height="80px">
-                    </div>
-                </div>
-            </section>
         </article>
-        <nav class="next">
-            <button class='cancel'>Cancelar</button>
+        <nav>
+            <button class='cancel' id="cancelUpdate" >Cancelar</button>
             <h1>Perfil</h1>
             <button class='done align-flush'>Guardar</button>
         </nav>
-        <article id="profile" class="next">
+        <article id="profile">
             <section>
                 <h2>Edita tu información</h2>
                 <form>
