@@ -11,9 +11,9 @@
 
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <!--<link rel="stylesheet" type="text/css" href="css/chui-android-3.8.10.min.css" /> -->
-        <link rel="stylesheet" type="text/css" href="css/themeAndroid.css" />
+        <!--<link rel="stylesheet" type="text/css" href="css/themeAndroid.css" /> -->
         <!--<link rel="stylesheet" type="text/css" href="css/chui-ios-3.8.10.min.css"> -->
-        <!--<link rel="stylesheet" type="text/css" href="css/themeIos.css" />-->
+        <!-- <link rel="stylesheet" type="text/css" href="css/themeIos.css" /> -->
         <script src="js/jquery-2.1.4.min.js"></script>
         <script src="js/chui-3.8.10.min.js"></script>
         <script src="js/jqrcode.min.js"></script>
@@ -45,7 +45,7 @@
                 width: auto;
             }
         </style>
-        <style>
+        <style type="text/css" media="all">
             .col {
                 padding: 20px 10px;
                 /*border: solid 1px #ccc;
@@ -135,66 +135,271 @@
                 100% { opacity: 0; }
             }
 
-            #containerCodeBidi{
-                text-align: center;
-                padding-left: 30%;
+            .hasError{
+                color:darkred !important;
+            }
+
+            .actionBtn{
+                background: #276527 !important;
+                color: whitesmoke !important;
+            }
+
+            .secondBtn{
+                background: #3066a0 !important;
+                color: whitesmoke !important;
             }
         </style>
+        <script id="dashboardTemplate" type="text/x-template">
+            <section>
+                <div class="grid gutter-5">
+                    <div class="col flex-3">
+                        <p>Vecino de</p>
+                        <p>[[= data.barrio ]]</p>
+                    </div>
+                    <div class="col flex-3">
+                        <p>BarrioOS</p>
+                    </div>
+                </div>
+                <div class="grid gutter-5">
+                    <p id="popupMessageTarget" class="attentionGrapper"></p>
+                    <div class="col flex-3">
+                        <img title="[[= data.first_name  ]]" src="[[= data.avatar_standar  ]]" height="150px">
+                    </div>
+                    <div class="col flex-3">
+                        <div class="rating">
+                            <p>[[= data.first_name ]]</p>
+                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                            </div>
+                        <br>
+                        <div style="display: none" id="containerCodeBidi"></div>
+                    </div>
+                </div>
+            </section>
+        </script>
+        <script id="profileTemplate" type="text/x-template">
+            <section>
+                <p id="popupUpdate" class="attentionGrapper"></p>
+                <h2>Edita tu información</h2>
+                <form id="formUpdate" action="users/me" method="PUT" >
+                    <ul class='list' ui-implements='form'>
+                        <li class="comp">
+                            <div>
+                                <label for="firstNameUpdate">Nombre:</label>
+                                <span data-error="first_name"></span>
+                            </div>
+                            <aside>
+                                <input id="firstNameUpdate" name="first_name" value="[[= data.first_name ]]" type="text" autocapitalize="words" autocorrect="off" required>
+                            </aside>
+                        </li>
+                        <li class="comp">
+                            <div>
+                                <label for="lastNameUpdate">Apellido:</label>
+                                <span data-error="last_name"></span>
+                            </div>
+                            <aside>
+                                <input id="lastNameUpdate" name="last_name" value="[[= data.last_name ]]" type="text" autocapitalize="words" autocorrect="off" >
+                            </aside>
+                        </li>
+                        <li class="comp">
+                            <div>
+                                <label for="emailUpdate">Correo:</label>
+                                <span data-error="email"></span>
+                            </div>
+                            <aside>
+                                <input id="emailUpdate" name="email" type="email" value="[[= data.email ]]" pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" title="example@dominio.com"  autocapitalize="off" autocorrect="off" required>
+                            </aside>
+                        </li>
+                        <li class="comp">
+                            <div>
+                                <label for="emailUpdateRe">Repita Correo:</label>
+                                <span data-error="email_confirmation"></span>
+                            </div>
+                            <aside>
+                                <input id="emailUpdateRe" name="email_confirmation" type="email" value="[[= data.email ]]" pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" title="example@dominio.com" autocapitalize="off" autocorrect="off" required>
+                            </aside>
+                        </li>
+                        <!--<li class='comp'>
+                            <div>
+                                <label for='passwordUpdate'>Contraseña:</label>
+                                <span data-error="password"></span>
+                            </div>
+                            <aside>
+                                <input id="passwordUpdate" name="password" type="password" value="" maxlength="16" autocapitalize="off" autocorrect="off" required>
+                            </aside>
+                        </li>
+                        <li class='comp'>
+                            <div>
+                                <label for='passwordReUpdate'>Repita Contraseña:</label>
+                                <span data-error="password_confirmation"></span>
+                            </div>
+                            <aside>
+                                <input id="passwordReUpdate" name="password_confirmation" type="password"
+                                       value="" maxlength="16" autocapitalize="off" autocorrect="off" required>
+                            </aside>
+                        </li> -->
+                        <li class='comp'>
+                            <div>
+                                <label for='postalCodeUpdate'>Código Postal:</label>
+                                <span data-error="postal_code"></span>
+                            </div>
+                            <aside>
+                                <input id="postalCodeUpdate" name="postal_code" type="text" value="[[= data.postal_code ]]" pattern="^\d+$" title="Solo números" autocapitalize="off" autocorrect="off" required>
+                            </aside>
+                        </li>
+                    </ul>
+                    <br>
+                    <ul class='list' ui-implements='form'>
+                        <li class='comp'>
+                            <div>
+                                <label for='phoneUpdate'>Telefono:</label>
+                                <span data-error="phone"></span>
+                            </div>
+                            <aside>
+                                <input id="phoneUpdate" name="phone" type="text" value="[[= data.phone ]]" maxlength="20" autocapitalize="off" autocorrect="off">
+                            </aside>
+                        </li>
+                        <li class='comp'>
+                            <div>
+                                <label for='addressUpdate'>Direccion:</label>
+                                <span data-error="address"></span>
+                            </div>
+                            <aside>
+                                <input id="addressUpdate" name="address" type="text" maxlength="200" value="[[= data.address ]]" autocapitalize="off" autocorrect="off">
+                            </aside>
+                        </li>
+                    </ul>
+                </form>
+            </section>
+        </script>
         <script>
             $(function() {
-                var user = JSON.parse(window.localStorage.getItem('user'));
-                var optionsContent = "<ul class='list'><li id='gotToProfile' ><h3>Perfil</h3></li><li id='signOut'><h3>Cerrar Sesion</h3></li></ul>";
-                var dashBoarTemplate =
-                        '<section>' +
-                            '<div class="grid gutter-5">' +
-                                '<div class="col flex-3">' +
-                                    '<p>Vecino de</p>' +
-                                    '<p></p>' +
-                                '</div>' +
-                                '<div class="col flex-3">' +
-                                    '<p>BarrioOS</p>'+
-                                '</div>' +
-                            '</div>' +
-                            '<div class="grid gutter-5">' +
-                                '<p id="popupMessageTarget" class="attentionGrapper"></p>' +
-                                '<div class="col flex-3">' +
-                                    '<img title="[[= data.first_name  ]]" src="[[= data.avatar_standar  ]]" height="150px">'+
-                                '</div>' +
-                                '<div class="col flex-3">' +
-                                    '<div class="rating">' +
-                                        '<p>[[= data.first_name ]]</p>' +
-                                        '<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>' +
-                                    '</div>' +
-                                    '<br>' +
-                                    '<div id="containerCodeBidi"></div>'+
-                                '</div>' +
-                            '</div>' +
-                        '</section>';
 
-                var myDashboardTmpl = $.template(dashBoarTemplate);
+                if($.isAndroid || $.isChrome){
+                    $("head").append("<link rel='stylesheet' type='text/css' href='css/themeAndroid.css' />");
+                    setTimeout(function() {
+                        $("body").fadeIn();
+                    });
+                }else{
+                    $("head").append("<link rel='stylesheet' type='text/css' href='css/themeIos.css' />");
+                    setTimeout(function() {
+                        $("body").fadeIn();
+                    });
+                }
+
+                var user = JSON.parse(window.localStorage.getItem('user'));
+                console.log(user);
+                var optionsContent = "<ul class='list'><li id='gotToProfile' ><h3>Perfil</h3></li><li id='signOut'><h3>Cerrar Sesion</h3></li></ul>";
+                var myDashboardTmpl = $.template($("#dashboardTemplate").text());
+                var myProfileTmpl = $.template($("#profileTemplate").text());
 
                 var goToDashboard = function(){
                     $.UIGoToArticle('#dashboard');
-                    $('#dashboard').html(myDashboardTmpl(user));
-                    var qrcode = new QRCode("containerCodeBidi", {
-                        text: user.id,
-                        width: 270,
-                        height: 270,
-                        colorDark : "#000000",
-                        colorLight : "#ffffff",
-                        correctLevel : QRCode.CorrectLevel.H
-                    });
-                    $('#containerCodeBidi img').attr({height:'80px'});
 
+                    var user = JSON.parse(window.localStorage.getItem('user'));
+                    var codeBidi = window.localStorage.getItem('codeBidi');
+                    $('#dashboard').html(myDashboardTmpl(user));
+
+                    if(codeBidi){
+                        $("#containerCodeBidi").html('<img src="'+ codeBidi +'" height="80px" />');
+                        $("#containerCodeBidi").fadeIn();
+                    }
+                    else
+                    {
+                        setTimeout(function(){
+                            var qrcode = new QRCode("containerCodeBidi", {
+                                text: "http://des.barrioosger.com/users/"+user.id,
+                                width: 270,
+                                height: 270,
+                                colorDark : "#000000",
+                                colorLight : "#ffffff",
+                                correctLevel : QRCode.CorrectLevel.H
+                            });
+                            $('#containerCodeBidi img').attr({
+                                height:'80px'
+                            });
+
+                            setTimeout(function(){
+                                window.localStorage.setItem('codeBidi',$('#containerCodeBidi img').attr('src'));
+                                $("#containerCodeBidi").html('<img src="'+ $('#containerCodeBidi img').attr('src') +'" height="80px" />');
+                                $("#containerCodeBidi").fadeIn();
+                            },500)
+
+                        }, 500);
+                    }
+
+
+                }
+
+                var goToProfile = function(){
+                    $.UIGoToArticle('#profile');
+
+                    user = JSON.parse(window.localStorage.getItem('user'));
+
+                    $('#profile').html(myProfileTmpl(user));
+
+                    $("#formUpdate").on("submit", function (e) {
+
+                        e.preventDefault();
+
+                        if(!validateConfirmation("formUpdate","emailUpdate", "email", "Correos" )){
+                            return false;
+                        }
+
+                        doAjax({
+                            identifier:"formUpdate",
+                            beforeSend: function(){
+                                cleanFormErrors("formUpdate");
+                                $.UIPopup({empty: true});
+                                $('.popup .panel').UIBusy({'color':'#1f344a', 'size': 80});
+                                $('.popup').find('.busy').UICenter('relative');
+
+                            },
+                            success:function(response){
+
+                                $('.popup').UIPopupClose();
+
+                                showPopup('Exito al actualizar tu información' ,
+                                        'Haz actualizado tu información correctamente',
+                                        'Hecho',
+                                        '',
+                                        'popupUpdate');
+
+                                window.localStorage.setItem("user", JSON.stringify(response));
+                            },
+                            error:function(response){
+                                $('.popup').UIPopupClose();
+
+                                if(response.responseJSON.status_code == 422)
+                                {
+                                    var errors = response.responseJSON.errors;
+                                    var $form = $("#formUpdate");
+                                    $.each(errors, function(key, value) {
+                                        var sel = $form.find("span[data-error='"+ key +"']");
+                                        $(sel).html(value);
+                                        $(sel).parent().addClass('hasError');
+                                    });
+                                }
+                                else
+                                {
+                                    showPopup('Lo sentimos :(' ,
+                                            'Algo ha salido mal intenta solicitando dentro de un momento',
+                                            'Hecho',
+                                            '',
+                                            'popupUpdate');
+                                }
+                            }
+                        })
+                    });
                 }
 
                 var doAjax = function(options){
                     var user = JSON.parse(window.localStorage.getItem('user'));
 
                     var url = "http://des.barrioosger.com/api/";
+
                     if(user){
                         $.ajaxSetup({
-                            headers: { 'Authorization': 'Bearer' + user.token }
+                            headers: { 'Authorization': 'Bearer ' + user.token }
                         });
                     }
                     $.ajax({
@@ -207,34 +412,182 @@
                     });
                 }
 
+                var validateConfirmation = function(form, identifier, keyDataError, Message){
+
+                    if($("#"+identifier).val() != $("#"+identifier+"Re").val()){
+                        $("#"+ form +" span[data-error='"+keyDataError+"']").html(Message+" no coiciden");
+                        $("#"+ form +" span[data-error='"+keyDataError+"']").parent().addClass("hasError");
+                        $("#"+ form +" span[data-error='"+keyDataError+"_confirmation']").html(Message+" no coiciden");
+                        $("#"+ form +" span[data-error='"+keyDataError+"_confirmation']").parent().addClass("hasError");
+                        return false;
+                    }
+                    return true;
+                }
+
+                var cleanFormErrors = function(form){
+                    $("#"+form+" li div").removeClass('hasError');
+                    $("#"+form+" li div span[data-error]").html("");
+                    $("#"+form+" h3[data-error]").html("");
+                }
+
+                var showPopup = function(title , message, cancelTitle, continueTitle, popupIdCallback ){
+                    $.UIPopup({
+                        id: "warning",
+                        title: title,
+                        message: message,
+                        cancelButton: cancelTitle,
+                        continueButton: continueTitle,
+                        callback: function() {
+                            var popup = document.querySelector('#'+popupIdCallback);
+                            popup.textContent = 'Thanks for staying with us a bit longer.';
+                            popup.classList.remove("animatePopupMessage");
+                            popup.classList.add("animatePopupMessage");
+                        }
+                    });
+                }
 
                 if(user){
                     goToDashboard();
                 }
 
-                $("#executeLogin").on("singletap", function () {
+                $("#formLogin").on("submit", function (e) {
+                    e.preventDefault();
                     doAjax({
                         identifier:"formLogin",
                         beforeSend: function(){
                             $.UIPopup({empty: true});
                             $('.popup .panel').UIBusy({'color':'#1f344a', 'size': 80});
                             $('.popup').find('.busy').UICenter('relative');
+                            //Clean errors
+                            cleanFormErrors("formLogin");
 
                         },
                         success:function(response){
 
                             $('.popup').UIPopupClose();
+
+                            $("#formLogin")[0].reset();
                             window.localStorage.setItem("user", JSON.stringify(response));
+
                             goToDashboard();
-
-
                         },
                         error:function(response){
                             $('.popup').UIPopupClose();
+                            if(response.responseJSON.status_code == 403){
+                                var sel = $("#formLogin").find("h3[data-error='validation']");
+                                $(sel).html("Su correo o contraseña son invalidos");
+                            }
+                            else
+                            {
+                                showPopup('Lo sentimos :(' ,
+                                        'Algo ha salido mal intenta iniciar sesion nuevamente',
+                                        'Hecho',
+                                        '',
+                                        'popupRegister');
+                            }
                         }
                     })
                 });
 
+                $("#formRegister").on("submit", function (e) {
+                    e.preventDefault();
+
+                    if(!validateConfirmation("formRegister","emailSignup", "email", "Correos" )){
+                        return false;
+                    }
+
+                    if(!validateConfirmation("formRegister","passwordSignup", "password", "Contraseñas" )){
+                        return false;
+                    }
+
+                    doAjax({
+                        identifier:"formRegister",
+                        beforeSend: function(){
+                            $.UIPopup({empty: true});
+                            $('.popup .panel').UIBusy({'color':'#1f344a', 'size': 80});
+                            $('.popup').find('.busy').UICenter('relative');
+                            cleanFormErrors("formRegister");
+
+                        },
+                        success:function(response){
+                            $("#formRegister")[0].reset();
+                            $('.popup').UIPopupClose();
+                            window.localStorage.setItem("user", JSON.stringify(response));
+                            goToDashboard();
+
+                        },
+                        error:function(response){
+
+                            $('.popup').UIPopupClose();
+
+                            if(response.responseJSON.status_code == 422){
+                                var errors = response.responseJSON.errors;
+                                var $form = $("#formRegister");
+                                $.each(errors, function(key, value) {
+                                    var sel = $form.find("span[data-error='"+ key +"']");
+                                    $(sel).html(value);
+                                    $(sel).parent().addClass('hasError');
+                                });
+                            }
+                            else
+                            {
+                                showPopup('Lo sentimos :(' ,
+                                        'Algo ha salido mal intenta registrarte nuevamente',
+                                        'Hecho',
+                                        '',
+                                        'popupRegister');
+                            }
+
+                        }
+                    })
+                });
+
+                $("#formRecover").on("submit", function (e) {
+                    e.preventDefault();
+                    doAjax({
+                        identifier:"formRecover",
+                        beforeSend: function(){
+                            $.UIPopup({empty: true});
+                            $('.popup .panel').UIBusy({'color':'#1f344a', 'size': 80});
+                            $('.popup').find('.busy').UICenter('relative');
+                            cleanFormErrors("formRecover");
+
+                        },
+                        success:function(response){
+
+                            $('.popup').UIPopupClose();
+
+                            $('#formRecover')[0].reset();
+
+                            showPopup('Exito al enviar la solicitud' ,
+                                    'Un correo de recuperación ha sido enviado a tu email',
+                                    'Hecho',
+                                    '',
+                                    'popupRecover');
+                        },
+                        error:function(response){
+
+                            $('.popup').UIPopupClose();
+
+                            if(response.responseJSON.status_code == 404){
+                                var $form = $("#formRecover");
+                                var sel = $form.find("span[data-error='email']");
+                                $(sel).html("Este correo no se encuentra");
+                                $(sel).parent().addClass('hasError');
+
+                            }else{
+                                showPopup('Lo sentimos :(' ,
+                                        'Algo ha salido mal intenta solicitando tu contraseña nuevamente',
+                                        'Hecho',
+                                        '',
+                                        'popupRecover');
+                            }
+
+
+
+                        }
+                    })
+                });
 
                 // This is just an animation for popup callback,
                 // Not part of popup functionality.
@@ -246,30 +599,24 @@
                 $("#containerCodeBidi").on("singletap", function() {
 
                     var src = $('#containerCodeBidi img').attr('src');
-                    $.UIPopup({
-                        id: "warning",
-                        title: '<br>',
-                        message: "<img title='Kiss' src='"+src+"' height='270px'>",
-                        cancelButton: 'Salir',
-                        continueButton: '',
-                        callback: function() {
-                            var popupMessageTarget = document.querySelector('#popupMessageTarget');
-                            popupMessageTarget.textContent = 'Thanks for staying with us a bit longer.';
-                            popupMessageTarget.classList.remove("animatePopupMessage");
-                            popupMessageTarget.classList.add("animatePopupMessage");
-                        }
-                    });
+
+                    showPopup('<br>' ,
+                            '<img  src="'+src+'" height="270px">',
+                            'Salir',
+                            '',
+                            'popupMessageTarget');
                 });
 
                 var popoverEventHandler = function() {
 
                     $("#gotToProfile").on("singletap", function () {
-                        $.UIGoToArticle("#profile");
+                        goToProfile();
                     });
 
                     $("#signOut").on("singletap", function(){
                         window.localStorage.removeItem("user");
-                        $.UIGoBack("#login");
+                        window.localStorage.removeItem("codeBidi");
+                        $.UIGoBackToArticle("#main");
                     });
 
                     $('.popover').on('singletap', function(e) {
@@ -312,19 +659,19 @@
                     $.UIGoToArticle("#dashboard");
                 });
 
-                $("#cancelUpdate").on("singletap", function () {
-                    $.UIGoBack("#dashboard");
+                $("#executeUpdate").on("singletap", function(){
+                    $("#formUpdate").submit();
                 });
 
 
             });
         </script>
     </head>
-    <body>
+    <body style="display: none">
         <nav>
             <h1>BarrioOS</h1>
         </nav>
-        <article id="main" class="current">
+        <article id="main">
         <section>
             <div class="grid center gutter-5">
                 <div class="col flex-8">
@@ -332,135 +679,150 @@
                     <p>Bienvenidos a BarrioOS</p>
 
                     <div class='horizontal centered' >
-                        <button id="goTologin">Iniciar Sesion</button>
+                        <button id="goTologin" class="actionBtn">Iniciar Sesion</button>
                     </div>
 
                     <div class='horizontal centered'>
-                        <button id="goToSignup">Registrarse</button>
+                        <button id="goToSignup" class="secondBtn">Registrarse</button>
                     </div>
                 </div>
             </div>
         </section>
     </article>
         <nav class="next">
-        <button class="back">BarrioOS</button>
-        <h1>Iniciar Sesión</h1>
-    </nav>
+            <button class="back">BarrioOS</button>
+            <h1>Iniciar Sesión</h1>
+            <button id="goToForgotPassword" >¿Contraseña?</button>
+        </nav>
         <article id="login" class="next">
-        <section>
-            <h2>Inicia Sesión</h2>
-            <form id="formLogin" action="auth/login" method="POST" >
-                <ul ui-implements='form' class='list'>
-                    <li class='comp'>
-                        <div>
-                            <label for="emailLogin">Correo:</label>
-                        </div>
-                        <aside>
-                            <input id="emailLogin" name="email" type="email" autocapitalize="off" autocorrect="off" required>
-                        </aside>
-                    </li>
-                    <li class='comp'>
-                        <div>
-                            <label for='passwordLogin'>Contraseña:</label>
-                        </div>
-                        <aside>
-                            <input id="passwordLogin" name="password" type="password" autocapitalize="off" autocorrect="off" required>
-                        </aside>
-                    </li>
-                </ul>
-            </form>
-            <div class='horizontal centered'>
-                <button id="executeLogin" >Iniciar Sesión</button>
-                <button id="goToForgotPassword">¿Olvido su contraseña?</button>
-            </div>
-        </section>
-    </article>
+            <section>
+                <h2>Inicia Sesión</h2>
+                <form id="formLogin" action="auth/login" method="POST" >
+                    <h3 data-error="validation" class="hasError"></h3>
+                    <ul ui-implements='form' class='list'>
+                        <li class='comp'>
+                            <div>
+                                <label for="emailLogin">Correo:</label>
+                            </div>
+                            <aside>
+                                <input id="emailLogin" name="email" type="email" autocapitalize="off" autocorrect="off" required>
+                            </aside>
+                        </li>
+                        <li class='comp'>
+                            <div>
+                                <label for='passwordLogin'>Contraseña:</label>
+                            </div>
+                            <aside>
+                                <input id="passwordLogin" name="password" type="password" maxlength="16" autocapitalize="off" autocorrect="off" required>
+                            </aside>
+                        </li>
+                    </ul>
+                    <div class='horizontal centered'>
+                        <button type="submit" class="actionBtn" >Iniciar Sesión</button>
+                    </div>
+                </form>
+            </section>
+        </article>
         <nav class="next">
             <button class="back">BarrioOS</button>
             <h1>Registrarse</h1>
         </nav>
         <article id="signup" class="next">
             <section>
+                <p id="popupRegister" class="attentionGrapper"></p>
                 <h2>Registrate</h2>
-                <ul class='list' ui-implements='form'>
+                <form id="formRegister" action="auth/register" method="POST">
+                    <ul class='list' ui-implements='form'>
                     <li class="comp">
                         <div>
-                            <label for="nameSignup">Nombre de Pila:</label>
+                            <label for="nameSignup">Nombre de Pila: </label>
+                            <span data-error="first_name"></span>
                         </div>
+
                         <aside>
-                            <input id="nameSignup" name="name" type="text" autocapitalize="words" autocorrect="off" required>
+                            <input id="nameSignup" name="first_name" type="text" autocapitalize="words" autocorrect="off" required>
                         </aside>
+
                     </li>
                     <li class="comp">
                         <div>
                             <label for="emailSignup">Correo:</label>
+                            <span data-error="email"></span>
                         </div>
                         <aside>
-                            <input id="emailSignup" name="email" type="text" autocapitalize="off" autocorrect="off" required>
+                            <input id="emailSignup" name="email" type="email" autocapitalize="off" autocorrect="off" pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" title="example@dominio.com" required>
                         </aside>
                     </li>
                     <li class="comp">
                         <div>
-                            <label for="emailReSignup">Repita Correo:</label>
+                            <label for="emailSignupRe">Repita Correo:</label>
+                            <span data-error="email_confirmation"></span>
                         </div>
                         <aside>
-                            <input id="emailReSignup" name="email_confirmation" type="text" autocapitalize="off" autocorrect="off" required>
+                            <input id="emailSignupRe" name="email_confirmation" type="email" pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" title="example@dominio.com" autocapitalize="off" autocorrect="off" required>
                         </aside>
                     </li>
                     <li class='comp'>
                         <div>
                             <label for='passwordSignup'>Contraseña:</label>
+                            <span data-error="password"></span>
                         </div>
                         <aside>
-                            <input id="passwordSignup" name="password" type="password" autocapitalize="off" autocorrect="off" required>
+                            <input id="passwordSignup" name="password" type="password" maxlength="16" autocapitalize="off" autocorrect="off" required>
                         </aside>
                     </li>
                     <li class='comp'>
                         <div>
-                            <label for='passwordReSignup'>Repita Contraseña:</label>
+                            <label for='passwordSignupRe'>Repita Contraseña:</label>
+                            <span data-error="password_confirmation"></span>
                         </div>
                         <aside>
-                            <input id="passwordReSignup" name="password_confirmation" type="password" autocapitalize="off" autocorrect="off" required>
+                            <input id="passwordSignupRe" name="password_confirmation" maxlength="16" type="password" autocapitalize="off" autocorrect="off" required>
                         </aside>
                     </li>
                     <li class='comp'>
                         <div>
                             <label for='postalCodeSignup'>Código Postal:</label>
+                            <span data-error="postal_code"></span>
                         </div>
                         <aside>
-                            <input id="postalCodeSignup" name="postal_code" type="text" autocapitalize="off" autocorrect="off" required>
+                            <input id="postalCodeSignup" name="postal_code" type="text" maxlength="5" pattern="^\d+$" title="Solo números" autocapitalize="off" autocorrect="off" required>
                         </aside>
                     </li>
                 </ul>
 
-                <ul class='list' ui-implements='form'>
+                    <ul class='list' ui-implements='form'>
                     <li>
                         <p><small>Al hacer clic en Registrarse, aceptas los <a href="">términos y condiciones</a> y la <a href="">política de privacidad</a></small></p>
                     </li>
                 </ul>
-                <button class='action' id="submitRegistration">Registrarse</button>
+                    <button type="submit" class='action secondBtn'>Registrarse</button>
+                </form>
+
         </section>
         </article>
         <nav class="next">
-            <button class="back">Iniciar Sessión</button>
+            <button class="back">Iniciar</button>
             <h1>Recuperar Contraseña</h1>
         </nav>
         <article id="forgotPassword" class="next">
             <section>
+                <p id="popupRecover" class="attentionGrapper"></p>
                 <h2>Solicita tu contraseña</h2>
-                <form>
+                <form id="formRecover" action="auth/recover" method="POST">
                     <ul ui-implements='form' class='list'>
                         <li class='comp'>
                             <div>
                                 <label for='emailRecover'>Correo:</label>
+                                <span data-error="email"></span>
                             </div>
                             <aside>
-                                <input id="emailRecover" name="email" type="text" name="user.email" autocapitalize="off" autocorrect="off" required>
+                                <input id="emailRecover" name="email" type="email" autocapitalize="off" autocorrect="off" required>
                             </aside>
                         </li>
                     </ul>
                     <div class='horizontal centered'>
-                        <button id="recoverSubmit" >Recuperar</button>
+                        <button type="submit" id="recoverExecute" class="actionBtn" >Recuperar</button>
                     </div>
                 </form>
             </section>
@@ -474,93 +836,12 @@
 
         </article>
         <nav>
-            <button class='cancel' id="cancelUpdate" >Cancelar</button>
+            <button class='back' id="cancelUpdate" >Cancelar</button>
             <h1>Perfil</h1>
-            <button class='done align-flush'>Guardar</button>
+            <button class='done align-flush' id="executeUpdate" >Guardar</button>
         </nav>
         <article id="profile">
-            <section>
-                <h2>Edita tu información</h2>
-                <form>
-                    <ul class='list' ui-implements='form'>
-                        <li class="comp">
-                            <div>
-                                <label for="firstNameUpdate">Nombre:</label>
-                            </div>
-                            <aside>
-                                <input id="firstNameUpdate" name="first_name" type="text" autocapitalize="words" autocorrect="off" required>
-                            </aside>
-                        </li>
-                        <li class="comp">
-                            <div>
-                                <label for="lastNameUpdate">Apellido:</label>
-                            </div>
-                            <aside>
-                                <input id="lastNameUpdate" name="last_name" type="text" autocapitalize="words" autocorrect="off" required>
-                            </aside>
-                        </li>
-                        <li class="comp">
-                            <div>
-                                <label for="emailUpdate">Correo:</label>
-                            </div>
-                            <aside>
-                                <input id="emailUpdate" name="email" type="text" autocapitalize="off" autocorrect="off" required>
-                            </aside>
-                        </li>
-                        <li class="comp">
-                            <div>
-                                <label for="emailReUpdate">Repita Correo:</label>
-                            </div>
-                            <aside>
-                                <input id="emailReUpdate" name="email_confirmation" type="text" autocapitalize="off" autocorrect="off" required>
-                            </aside>
-                        </li>
-                        <li class='comp'>
-                            <div>
-                                <label for='passwordUpdate'>Contraseña:</label>
-                            </div>
-                            <aside>
-                                <input id="passwordUpdate" name="password" type="password" autocapitalize="off" autocorrect="off" required>
-                            </aside>
-                        </li>
-                        <li class='comp'>
-                            <div>
-                                <label for='passwordReUpdate'>Repita Contraseña:</label>
-                            </div>
-                            <aside>
-                                <input id="passwordReUpdate" name="password_confirmation" type="password" autocapitalize="off" autocorrect="off" required>
-                            </aside>
-                        </li>
-                        <li class='comp'>
-                            <div>
-                                <label for='postalCodeUpdate'>Código Postal:</label>
-                            </div>
-                            <aside>
-                                <input id="postalCodeUpdate" name="postal_code" type="text" autocapitalize="off" autocorrect="off" required>
-                            </aside>
-                        </li>
-                    </ul>
-                    <br>
-                    <ul class='list' ui-implements='form'>
-                        <li class='comp'>
-                            <div>
-                                <label for='phoneUpdate'>Telefono:</label>
-                            </div>
-                            <aside>
-                                <input id="phoneUpdate" name="phone" type="text" autocapitalize="off" autocorrect="off" required>
-                            </aside>
-                        </li>
-                        <li class='comp'>
-                            <div>
-                                <label for='addressUpdate'>Direccion:</label>
-                            </div>
-                            <aside>
-                                <input id="addressUpdate" name="address" type="text" autocapitalize="off" autocorrect="off" required>
-                            </aside>
-                        </li>
-                    </ul>
-                </form>
-            </section>
+
         </article>
 
         <script type="text/javascript" src="cordova.js"></script>

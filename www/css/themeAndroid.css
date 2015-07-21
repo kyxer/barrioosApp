@@ -6,7 +6,7 @@ License: MIT
 Version: 3.8.10
 */
 .attentionGrapper {
-    color: #558a55 !important;
+    color: #076307 !important;
 }
 .cloak > * {
     display: none;
@@ -426,14 +426,14 @@ html[dir=rtl] button.align-flush {
     right: auto;
 }
 #global-nav {
-    background-color: #1f344a;
+    background-color: #2c445f;
     overflow: hidden;
     box-shadow: 0 1px 2px #666666;
     padding: 0 5px;
     z-index: 1111111111;
 }
 nav {
-    background-color: #1f344a;
+    background-color: #2c445f;
     height: 50px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -571,8 +571,8 @@ html[dir=rtl] body.isNativeAndroidBrowser nav > h1 + button {
     content: "";
     width: 7px;
     height: 7px;
-    border-right: solid 3px #558a55;
-    border-top: solid 3px #558a55;
+    border-right: solid 3px #076307;
+    border-top: solid 3px #076307;
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
     transform: rotate(45deg);
@@ -590,8 +590,8 @@ html[dir=rtl] body.isNativeAndroidBrowser nav > h1 + button {
     width: 22px;
     height: 20px;
     border-radius: 20px;
-    border: solid 1px #558a55;
-    color: #558a55;
+    border: solid 1px #076307;
+    color: #076307;
     font: bold 14px/0 Roboto, SegoeWP, HelveticaNeue, Sans-serif;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -815,8 +815,8 @@ li.comp > aside > .nav::after {
     content: "";
     width: 7px;
     height: 7px;
-    border-right: solid 3px #558a55;
-    border-top: solid 3px #558a55;
+    border-right: solid 3px #076307;
+    border-top: solid 3px #076307;
     -webkit-transform: rotate(45deg) translate3d(2px, -2px, 0);
     -moz-transform: rotate(45deg) translate3d(2px, -2px, 0);
     transform: rotate(45deg) translate3d(2px, -2px, 0);
@@ -831,8 +831,8 @@ li.comp > aside > .show-detail::after {
     width: 22px;
     height: 20px;
     border-radius: 20px;
-    border: solid 1px #558a55;
-    color: #558a55;
+    border: solid 1px #076307;
+    color: #076307;
     font: bold 14px/0 Roboto, Times, serif;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -873,8 +873,8 @@ html[dir=rtl] li.comp aside > span.nav::after {
     right: auto;
     left: 16px;
     border: none;
-    border-left: solid 3px #558a55;
-    border-bottom: solid 3px #558a55;
+    border-left: solid 3px #076307;
+    border-bottom: solid 3px #076307;
 }
 html[dir=rtl] li.comp aside > h4 {
     margin-left: 5px;
@@ -1114,7 +1114,7 @@ html[dir=rtl] .grid {
 .segmented:not(.paging) > button.segment.selected {
     opacity: 1 !important;
     box-shadow: none;
-    border-bottom: solid 3px #1f344a;
+    border-bottom: solid 3px #2c445f;
     padding: 11px 10px 3px;
 }
 .segmented:not(.paging) > button.segment.selected {
@@ -1357,7 +1357,7 @@ html[dir=rtl] .isNativeAndroidBrowser .segmented.paging.horizontal > button:firs
     transform: translate3d(0, 0, 0);
     padding: 0 16px;
     vertical-align: middle;
-    background-color: #1f344a;
+    background-color: #2c445f;
     overflow: hidden;
     border-top: solid 1px #666666;
 }
@@ -1456,7 +1456,7 @@ body.splitlayout {
     align-items: stretch;
 }
 .splitlayout > nav {
-    background-color: #1f344a;
+    background-color: #2c445f;
     border-bottom: solid 1px #a7a7aa;
 }
 .splitlayout > nav:first-of-type {
@@ -1667,7 +1667,7 @@ button.show-popover.align-flush {
     position: absolute;
 }
 button.show-popover.selected {
-    background-color: #1f344a;
+    background-color: #2c445f;
 }
 .segmented > button.show-popover:first-of-type {
     border-left: none !important;
@@ -1863,7 +1863,7 @@ html[dir=rtl] .isDesktop .button.show-popover:hover::after {
     width: 21px;
     height: 21px;
     position: absolute;
-    background-image: url("data:image/svg+xml;utf8,%3Csvg%20width%3D%22367px%22%20height%3D%22367px%22%20viewBox%3D%220%200%20367%20367%22%20version%3D%221.1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%3E%3Cg%20id%3D%22Page-1%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20id%3D%22Sortable%22%20transform%3D%22translate%2813.000000,%2013.000000%29%22%20stroke%3D%22%231f344a%22%20stroke-width%3D%2225%22%3E%3Ccircle%20id%3D%22Oval-1%22%20cx%3D%22170.5%22%20cy%3D%22170.5%22%20r%3D%22170.5%22%3E%3C/circle%3E%3Cpath%20d%3D%22M55.3736267,209.778395%20L172.745285,100.706186%20L286.306656,209.611568%22%20id%3D%22Path-2%22%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml;utf8,%3Csvg%20width%3D%22367px%22%20height%3D%22367px%22%20viewBox%3D%220%200%20367%20367%22%20version%3D%221.1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%3E%3Cg%20id%3D%22Page-1%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20id%3D%22Sortable%22%20transform%3D%22translate%2813.000000,%2013.000000%29%22%20stroke%3D%22%232c445f%22%20stroke-width%3D%2225%22%3E%3Ccircle%20id%3D%22Oval-1%22%20cx%3D%22170.5%22%20cy%3D%22170.5%22%20r%3D%22170.5%22%3E%3C/circle%3E%3Cpath%20d%3D%22M55.3736267,209.778395%20L172.745285,100.706186%20L286.306656,209.611568%22%20id%3D%22Path-2%22%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100% 100%;
@@ -1888,7 +1888,7 @@ html[dir=rtl] .isDesktop .button.show-popover:hover::after {
     padding: 2px 5px 13px 1px;
     width: 24px;
     height: 24px;
-    border: solid 2px #1f344a;
+    border: solid 2px #2c445f;
     position: absolute;
     top: 14px;
     left: -32px;
@@ -1899,10 +1899,10 @@ html[dir=rtl] .isDesktop .button.show-popover:hover::after {
 }
 .isDesktop .deletion-indicator:hover,
 li.selected > .deletion-indicator {
-    color: #1f344a !important;
-    background-color: #1f344a;
-    box-shadow: 0 0 3px #1f344a;
-    border-color: #1f344a;
+    color: #2c445f !important;
+    background-color: #2c445f;
+    box-shadow: 0 0 3px #2c445f;
+    border-color: #2c445f;
 }
 li.selected > .deletion-indicator::before {
     content: "";
@@ -2110,8 +2110,8 @@ input:focus,
 textarea:focus {
     outline: none !important;
     /* Create the bracket around inputs: */
-    background-image: -webkit-linear-gradient(left, #1f344a, #1f344a);
-    background-image: linear-gradient(left, #1f344a, #1f344a);
+    background-image: -webkit-linear-gradient(left, #2c445f, #2c445f);
+    background-image: linear-gradient(left, #2c445f, #2c445f);
     background-size: 100% 2px;
 }
 .isAndroid:not(.isDesktop) .select-box > select {
@@ -2212,7 +2212,7 @@ input[type="range"] {
     height: 4px;
     border-radius: 2px;
     background-color: transparent;
-    background-image: -webkit-linear-gradient(top, #1f344a, #1f344a), -webkit-linear-gradient(top, #cccccc, #cccccc);
+    background-image: -webkit-linear-gradient(top, #2c445f, #2c445f), -webkit-linear-gradient(top, #cccccc, #cccccc);
     background-size: 0px 3px, 0 2px;
     background-position: left center;
     background-repeat: no-repeat;
@@ -2225,7 +2225,7 @@ input[type="range"]::-webkit-slider-thumb {
     height: 16px;
     border-radius: 18px;
     margin: 0;
-    background-color: #1f344a;
+    background-color: #2c445f;
     border: solid 1px transparent;
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.15);
     -webkit-transition: all 0.5s ease-in-out;
@@ -2234,12 +2234,12 @@ input[type="range"]::-webkit-slider-thumb {
 }
 input[type="range"]:focus::-webkit-slider-thumb,
 .isDesktop input[type="range"]::-webkit-slider-thumb:hover {
-    box-shadow: 0 0 0 2px #1f344a, 0 0 0 11px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 0 2px #2c445f, 0 0 0 11px rgba(0, 0, 0, 0.08);
 }
 .isDesktop input[type="range"]::-webkit-slider-thumb:hover::before {
     content: "";
     display: block;
-    background-color: #1f344a;
+    background-color: #2c445f;
     border-radius: 50%;
     position: absolute;
     top: 0;
@@ -2255,7 +2255,7 @@ input[type="range"]:focus::-webkit-slider-thumb,
     height: 2px;
     border-radius: 2px;
     background-color: #cccccc;
-    background-image: -webkit-linear-gradient(top, #1f344a, #1f344a);
+    background-image: -webkit-linear-gradient(top, #2c445f, #2c445f);
     background-size: 0px 2px;
     background-position: left center;
     background-repeat: no-repeat;
@@ -2289,13 +2289,13 @@ html[dir=rtl] body.isNativeAndroidBrowser input[type="range"] {
 }
 .list.select li:hover::after,
 .list.select li.selected::after {
-    background-color: #558a55;
+    background-color: #076307;
     -webkit-transition: all 0.125s ease-in-out;
     -moz-transition: all 0.125s ease-in-out;
     transition: all 0.125s ease-in-out;
     opacity: 1;
     box-shadow: inset 0 0px 0px 3px #fff;
-    border: solid 2px #558a55;
+    border: solid 2px #076307;
 }
 .list.select li::after {
     content: "";
@@ -2705,7 +2705,7 @@ li.switched h3 {
     width: auto;
     font-size: 13pt;
     line-height: 24pt;
-    color: #558a55;
+    color: #076307;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -2769,8 +2769,8 @@ html[dir=rtl] li.switched h4 {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    background-image: -webkit-linear-gradient(left, #a2d7a2, #a2d7a2), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
-    background-image: linear-gradient(to left, #a2d7a2, #a2d7a2), linear-gradient(to left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+    background-image: -webkit-linear-gradient(left, #54b054, #54b054), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+    background-image: linear-gradient(to left, #54b054, #54b054), linear-gradient(to left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
     background-position: left 3px, left 3px;
     background-size: 0% 14px, 100% 14px;
     background-repeat: no-repeat, no-repeat;
@@ -2813,7 +2813,7 @@ html[dir=rtl] li.switched h4 {
     background-color: #cecece;
 }
 .isDesktop .switch.traditional:hover {
-    box-shadow: 0 0 2px 2px #558a55;
+    box-shadow: 0 0 2px 2px #076307;
 }
 .switch > em {
     display: block;
@@ -2843,7 +2843,7 @@ html[dir=rtl] li.switched h4 {
     -webkit-transform: translate3d(22px, 0, 0);
     -moz-transform: translate3d(22px, 0, 0);
     transform: translate3d(22px, 0, 0);
-    background-color: #558a55;
+    background-color: #076307;
     animation-name: switchRipple;
 }
 .switch.traditional.on {
@@ -2854,8 +2854,8 @@ html[dir=rtl] li.switched h4 {
     -webkit-transform: translate3d(36px, 0, 0);
     -moz-transform: translate3d(36px, 0, 0);
     transform: translate3d(36px, 0, 0);
-    background-color: #558a55;
-    border: solid 1px #558a55;
+    background-color: #076307;
+    border: solid 1px #076307;
     border-top: solid 1px #3d9aff;
     border-left-color: #003166;
     animation-name: "";
@@ -2872,7 +2872,7 @@ html[dir=rtl] .switch.on > em {
     transform: translate3d(-20px, 0, 0);
 }
 html[dir=rtl] .switch.on > em.traditional {
-    border-left-color: #558a55;
+    border-left-color: #076307;
     border-right-color: #003166;
 }
 html[dir=rtl] .switch > em {
@@ -2935,7 +2935,7 @@ body.hasTabBar article .next:not(.navigable) {
 .tabbar > button.selected {
     opacity: 1 !important;
     box-shadow: none !important;
-    border-bottom: solid 3px #1f344a;
+    border-bottom: solid 3px #2c445f;
     padding: 6px 10px 3px;
 }
 .tabbar > button.more {
@@ -3071,14 +3071,14 @@ html[dir=rtl] .tabbar > button:last-child {
     border-radius: 50%;
 }
 .pagination > li.selected {
-    background-color: #1f344a;
+    background-color: #2c445f;
     cursor: pointer;
 }
 .pagination > li:last-of-type {
     margin-right: 0;
 }
 .isDesktop .pagination > li:hover {
-    background-color: #1f344a;
+    background-color: #2c445f;
     cursor: pointer;
 }
 html[dir=rtl] .pagination > li {
