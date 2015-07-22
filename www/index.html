@@ -341,7 +341,7 @@
                 var myProfileTmpl = $.template($("#profileTemplate").text());
                 var myAvatarTmpl = $.template($("#avatarTemplate").text());
 
-                var goToDashboard = function(){
+                goToDashboard = function(){
 
                     $.UIGoToArticle('#dashboard');
 
@@ -556,7 +556,7 @@
                     $("#"+form+" h3[data-error]").html("");
                 }
 
-                var showPopup = function(title , message, cancelTitle, continueTitle, popupIdCallback ){
+                showPopup = function(title , message, cancelTitle, continueTitle, popupIdCallback ){
                     $.UIPopup({
                         id: "warning",
                         title: title,
@@ -1064,8 +1064,50 @@
 
             var apiTest = function () {
                 facebookConnectPlugin.api( "me/?fields=id,email,first_name,last_name", [],
-                        function (response) { alert(JSON.stringify(response)) },
-                        function (response) { alert(JSON.stringify(response)) });
+                        function (response) {
+
+                            var user = {}
+                            user.provider_id = response.id;
+                            user.email = response.email;
+                            user.avatar_standar= "http://graph.facebook.com/"+response.id+"/picture?type=large";
+                            user.avatar_thumbnail= "http://graph.facebook.com/"+response.id+"/picture?type=small";
+                            user.first_name = response.first_name;
+                            user.last_name = response.last_name;
+
+                            $.ajax({
+                                url: "http://www.proyectodes.net/api/auth/provider",
+                                type: "POST",
+                                data: user,
+                                beforeSend: function(){
+                                    $.UIPopup({empty: true});
+                                    $('.popup .panel').UIBusy({'color':'#1f344a', 'size': 80});
+                                    $('.popup').find('.busy').UICenter('relative');
+                                },
+                                success: function(){
+                                    $('.popup').UIPopupClose();
+                                    window.localStorage.setItem("user", JSON.stringify(response));
+                                    goToDashboard();
+                                },
+                                error: function(){
+                                    $('.popup').UIPopupClose();
+
+                                    showPopup('Lo sentimos :(' ,
+                                            'Algo ha salido mal intenta iniciar nuevamente',
+                                            'Hecho',
+                                            '',
+                                            'popupRegister');
+                                }
+                            });
+
+                        },
+                        function (response) {
+                            showPopup('Lo sentimos :(' ,
+                                    'Algo ha salido mal intenta iniciar nuevamente',
+                                    'Hecho',
+                                    '',
+                                    'popupRegister');
+                            alert(JSON.stringify(response))
+                        });
             }
 
             var getAccessToken = function () {
