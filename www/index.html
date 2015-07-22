@@ -487,7 +487,7 @@
 
                     $('#avatarInput').fileupload({
                         dataType: 'json',
-                        url: 'http://des.barrioosger.com/api/users/me/avatar',
+                        url: 'http://www.proyectosdes.net/api/users/me/avatar',
                         done: function (e, response) {
                             window.localStorage.setItem("user", JSON.stringify(response.result));
                             var img = '<img src="'+response.result.avatar_standar+'" height="150" />';
@@ -516,7 +516,7 @@
                 var doAjax = function(options){
                     var user = JSON.parse(window.localStorage.getItem('user'));
 
-                    var url = "http://des.barrioosger.com/api/";
+                    var url = "http://www.proyectosdes.net/api/";
 
                     if(user){
                         $.ajaxSetup({
