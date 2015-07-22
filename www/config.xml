@@ -67,6 +67,8 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" /> -->
+    <gap:plugin name="org.apache.cordova.file" />
+    <gap:plugin name="org.apache.cordova.file-transfer" />
     <gap:plugin name="com.phonegap.plugins.facebookconnect">
         <param name="APP_ID" value="1017010178318950" />
         <param name="APP_NAME" value="BarrioOS" />
