@@ -25,15 +25,10 @@
       <file leaf-file-name="facebookConnectPlugin.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/facebookConnectPlugin.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+            <state vertical-scroll-proportion="-9.411765">
+              <caret line="82" column="35" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="35" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="e#361#5065#0" expanded="false" />
-                <element signature="e#404#807#0" expanded="false" />
-                <element signature="e#855#2388#0" expanded="false" />
-                <element signature="e#2506#2996#0" expanded="false" />
-                <element signature="e#3039#3342#0" expanded="false" />
                 <element signature="e#3410#3488#0" expanded="false" />
                 <element signature="e#3545#3623#0" expanded="false" />
                 <element signature="e#3658#4053#0" expanded="false" />
@@ -45,8 +40,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7993967">
-              <caret line="982" column="39" selection-start-line="982" selection-start-column="39" selection-end-line="982" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.26093516">
+              <caret line="988" column="69" selection-start-line="988" selection-start-column="69" selection-end-line="988" selection-end-column="69" />
               <folding>
                 <element signature="n#script#7;n#head#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="e#15503#15684#0" expanded="false" />
@@ -612,6 +607,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/facebookConnectPlugin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.411765">
+          <caret line="82" column="35" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="35" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#3410#3488#0" expanded="false" />
+            <element signature="e#3545#3623#0" expanded="false" />
+            <element signature="e#3658#4053#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/config.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -620,28 +628,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/facebookConnectPlugin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#361#5065#0" expanded="false" />
-            <element signature="e#404#807#0" expanded="false" />
-            <element signature="e#855#2388#0" expanded="false" />
-            <element signature="e#2506#2996#0" expanded="false" />
-            <element signature="e#3039#3342#0" expanded="false" />
-            <element signature="e#3410#3488#0" expanded="false" />
-            <element signature="e#3545#3623#0" expanded="false" />
-            <element signature="e#3658#4053#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7993967">
-          <caret line="982" column="39" selection-start-line="982" selection-start-column="39" selection-end-line="982" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.26093516">
+          <caret line="988" column="69" selection-start-line="988" selection-start-column="69" selection-end-line="988" selection-end-column="69" />
           <folding>
             <element signature="n#script#7;n#head#0;n#html#0;n#!!top" expanded="false" />
             <element signature="e#15503#15684#0" expanded="false" />

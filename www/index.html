@@ -986,7 +986,7 @@
                     //var appId = prompt("Enter FB Application ID", "");
                     facebookConnectPlugin.browserInit("1017010178318950");
                 }
-                facebookConnectPlugin.login( ["email","offline_access"],
+                facebookConnectPlugin.login( ["email","public_profile"],
                         function (response) { alert(JSON.stringify(response)) },
                         function (response) { alert(JSON.stringify(response)) });
             }
