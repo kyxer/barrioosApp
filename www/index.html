@@ -755,10 +755,10 @@
                 });
 
                 $("#loginFacebook").on("singletap", function(){
-                    facebookConnectPlugin.login(['email'], function(){
-                        alert("success");
+                    facebookConnectPlugin.login(['email'], function(response){
+                        alert(JSON.stringify(response));
                     }, function(e){
-                        alert("error");
+                        alert(JSON.stringify(e));
                     })
                 });
 
