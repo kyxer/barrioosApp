@@ -311,8 +311,8 @@
                     <div class="col flex-10">
                         <form action="users/me/avatar" method="POST" >
                             <div class='horizontal centered'>
-                                <input id="avatarInput" name="avatar"  style="height:40px;" type="file" />
-                                <button> Seleccionar Avatar </button>
+                                <!--<input id="avatarInput" name="avatar"  style="height:40px;" type="file" />-->
+                                <button id="avatarButton"> Seleccionar Avatar </button>
                             </div>
                         </form>
                     </div>
@@ -480,7 +480,11 @@
                     var user = JSON.parse(window.localStorage.getItem('user'));
                     $('#avatar').html(myAvatarTmpl(user));
 
-                    $.ajaxSetup({
+                    $("#avatarButton").on("singletap", function(){
+                        getImage();
+                    });
+
+                    /*$.ajaxSetup({
                         headers: { 'Authorization': 'Bearer ' + user.token }
                     });
 
@@ -497,7 +501,9 @@
                         progressall: function (e, data) {
                             var progress = parseInt(data.loaded / data.total * 100, 10);
                         }
-                    });
+                    });*/
+
+
 
                     $('#avatarDone').on('singletap', function (){
                         if(navigation == 'profile') {
@@ -980,6 +986,53 @@
             app.initialize();
         </script>
         <script type="text/javascript">
+
+            function getImage() {
+                // Retrieve image file location from specified source
+                navigator.camera.getPicture(uploadPhoto, function(message) {
+                            alert('get picture failed');
+                        },{
+                            quality: 50,
+                            destinationType: navigator.camera.DestinationType.FILE_URI,
+                            sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+                        }
+                );
+
+            }
+
+            function uploadPhoto(imageURI) {
+                var options = new FileUploadOptions();
+                options.fileKey="avatar";
+                options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+                options.mimeType="image/jpeg";
+
+                alert(options.fileName);
+
+                var params = new Object();
+
+                var user = JSON.parse(window.localStorage.getItem('user'));
+
+                params.headers={'Authorization':'Bearer ' + user.token};
+
+                var ft = new FileTransfer();
+                ft.upload(imageURI, encodeURI("http://www.proyectodes.net/api/users/me/avatar"), win, fail, options);
+            }
+
+            function win(r) {
+                alert(JSON.stringify(r.response));
+                console.log("Code = " + r.responseCode);
+                console.log("Response = " + r.response);
+                console.log("Sent = " + r.bytesSent);
+            }
+
+            function fail(error) {
+                alert(JSON.stringify(error.source));
+                alert("An error has occurred: Code = " + error.code);
+                console.log("upload error source " + error.source);
+                console.log("upload error target " + error.target);
+            }
+
+
             var login = function () {
                 if (!window.cordova) {
                     //var appId = prompt("Enter FB Application ID", "");

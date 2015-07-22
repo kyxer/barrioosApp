@@ -34,17 +34,6 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-
-        navigator.camera.getPicture(uploadPhoto,
-            function(message) {
-                alert('get picture failed');
-            },
-            { quality: 50,
-                destinationType: navigator.camera.DestinationType.FILE_URI,
-                sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
-            }
-        );
-
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -58,37 +47,3 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
-
-function uploadPhoto(imageURI) {
-    var options = new FileUploadOptions();
-    options.fileKey="avatar";
-    options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
-    options.mimeType="image/jpeg";
-
-    alert(options.fileName);
-
-    var params = new Object();
-
-    var user = JSON.parse(window.localStorage.getItem('user'));
-
-    params.headers={'Authorization':'Bearer ' + user.token};
-
-    var ft = new FileTransfer();
-    ft.upload(imageURI, encodeURI("http://www.proyectodes.net/api/users/me/avatar"), win, fail, options);
-}
-
-function win(r) {
-    alert(JSON.stringify(r.response));
-    console.log("Code = " + r.responseCode);
-    console.log("Response = " + r.response);
-    console.log("Sent = " + r.bytesSent);
-}
-
-function fail(error) {
-    alert(JSON.stringify(error.source));
-    alert("An error has occurred: Code = " + error.code);
-    console.log("upload error source " + error.source);
-    console.log("upload error target " + error.target);
-}
-
-
