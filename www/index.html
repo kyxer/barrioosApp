@@ -989,7 +989,7 @@
                 facebookConnectPlugin.login( ["email","public_profile"],
                         function (response) {
 
-                            alert(JSON.stringify(response));
+                            //alert(JSON.stringify(response));
                             apiTest();
 
                         },
@@ -1003,7 +1003,7 @@
             }
 
             var apiTest = function () {
-                facebookConnectPlugin.api( "me/?fields=id,email", ["user_birthday"],
+                facebookConnectPlugin.api( "me/?fields=id,email",
                         function (response) { alert(JSON.stringify(response)) },
                         function (response) { alert(JSON.stringify(response)) });
             }
