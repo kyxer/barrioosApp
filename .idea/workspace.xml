@@ -25,8 +25,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5166932">
-              <caret line="760" column="46" selection-start-line="760" selection-start-column="46" selection-end-line="760" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.46263912">
+              <caret line="770" column="34" selection-start-line="770" selection-start-column="34" selection-end-line="770" selection-end-column="34" />
               <folding>
                 <element signature="n#script#7;n#head#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="e#15503#15684#0" expanded="false" />
@@ -39,7 +39,7 @@
                 <element signature="e#29066#30964#0" expanded="false" />
                 <element signature="e#31324#32143#0" expanded="false" />
                 <element signature="e#32207#32582#0" expanded="false" />
-                <element signature="e#32976#33042#0" expanded="false" />
+                <element signature="e#34167#34233#0" expanded="false" />
                 <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#article#4;n#body#0;n#html#0;n#!!top" expanded="false" />
               </folding>
@@ -310,7 +310,7 @@
             <element signature="e#29066#30964#0" expanded="false" />
             <element signature="e#31324#32143#0" expanded="false" />
             <element signature="e#32207#32582#0" expanded="false" />
-            <element signature="e#32976#33042#0" expanded="false" />
+            <element signature="e#34167#34233#0" expanded="false" />
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#article#4;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
@@ -357,7 +357,7 @@
             <element signature="e#29066#30964#0" expanded="false" />
             <element signature="e#31324#32143#0" expanded="false" />
             <element signature="e#32207#32582#0" expanded="false" />
-            <element signature="e#32976#33042#0" expanded="false" />
+            <element signature="e#34167#34233#0" expanded="false" />
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#article#4;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
@@ -388,7 +388,7 @@
             <element signature="e#29066#30964#0" expanded="false" />
             <element signature="e#31324#32143#0" expanded="false" />
             <element signature="e#32207#32582#0" expanded="false" />
-            <element signature="e#32976#33042#0" expanded="false" />
+            <element signature="e#34167#34233#0" expanded="false" />
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#article#4;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
@@ -411,7 +411,7 @@
             <element signature="e#29066#30964#0" expanded="false" />
             <element signature="e#31324#32143#0" expanded="false" />
             <element signature="e#32207#32582#0" expanded="false" />
-            <element signature="e#32976#33042#0" expanded="false" />
+            <element signature="e#34167#34233#0" expanded="false" />
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#article#4;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
@@ -600,8 +600,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5166932">
-          <caret line="760" column="46" selection-start-line="760" selection-start-column="46" selection-end-line="760" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.46263912">
+          <caret line="770" column="34" selection-start-line="770" selection-start-column="34" selection-end-line="770" selection-end-column="34" />
           <folding>
             <element signature="n#script#7;n#head#0;n#html#0;n#!!top" expanded="false" />
             <element signature="e#15503#15684#0" expanded="false" />
@@ -614,7 +614,7 @@
             <element signature="e#29066#30964#0" expanded="false" />
             <element signature="e#31324#32143#0" expanded="false" />
             <element signature="e#32207#32582#0" expanded="false" />
-            <element signature="e#32976#33042#0" expanded="false" />
+            <element signature="e#34167#34233#0" expanded="false" />
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#article#4;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
