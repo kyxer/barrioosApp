@@ -755,37 +755,7 @@
                 });
 
                 $("#loginFacebook").on("singletap", function(){
-
-                    facebookConnectPlugin.login(['email'], function(response){
-
-                        if (response.status === 'connected') {
-                            // the user is logged in and has authenticated your
-                            // app, and response.authResponse supplies
-                            // the user's ID, a valid access token, a signed
-                            // request, and the time the access token
-                            // and signed request each expire
-                            var uid = response.authResponse.userID;
-                            var accessToken = response.authResponse.accessToken;
-
-                            FB.api('/me', function(response) {
-                                //console.log('Good to see you, ' + response.name + '.');
-                                alert(JSON.stringify(response));
-
-                            });
-
-
-                        } else if (response.status === 'not_authorized') {
-                            // the user is logged in to Facebook,
-                            // but has not authenticated your app
-                        } else {
-                            // the user isn't logged in to Facebook.
-                        }
-
-
-                        //alert(JSON.stringify(response));
-                    }, function(e){
-                        alert(JSON.stringify(e));
-                    });
+                    login();
                 });
 
                 $("#goTologin").on("singletap", function () {
@@ -1005,9 +975,51 @@
         </article>
 
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/facebookConnectPlugin.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
+        </script>
+        <script type="text/javascript">
+            var login = function () {
+                if (!window.cordova) {
+                    //var appId = prompt("Enter FB Application ID", "");
+                    facebookConnectPlugin.browserInit("1017010178318950");
+                }
+                facebookConnectPlugin.login( ["email","offline_access"],
+                        function (response) { alert(JSON.stringify(response)) },
+                        function (response) { alert(JSON.stringify(response)) });
+            }
+
+            var showDialog = function () {
+                facebookConnectPlugin.showDialog( { method: "feed" },
+                        function (response) { alert(JSON.stringify(response)) },
+                        function (response) { alert(JSON.stringify(response)) });
+            }
+
+            var apiTest = function () {
+                facebookConnectPlugin.api( "me/?fields=id,email", ["user_birthday"],
+                        function (response) { alert(JSON.stringify(response)) },
+                        function (response) { alert(JSON.stringify(response)) });
+            }
+
+            var getAccessToken = function () {
+                facebookConnectPlugin.getAccessToken(
+                        function (response) { alert(JSON.stringify(response)) },
+                        function (response) { alert(JSON.stringify(response)) });
+            }
+
+            var getStatus = function () {
+                facebookConnectPlugin.getLoginStatus(
+                        function (response) { alert(JSON.stringify(response)) },
+                        function (response) { alert(JSON.stringify(response)) });
+            }
+
+            var logout = function () {
+                facebookConnectPlugin.logout(
+                        function (response) { alert(JSON.stringify(response)) },
+                        function (response) { alert(JSON.stringify(response)) });
+            }
         </script>
     </body>
 </html>
