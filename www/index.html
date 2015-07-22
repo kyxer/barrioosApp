@@ -480,6 +480,7 @@
                     $('#avatar').html(myAvatarTmpl(user));
 
                     $("#avatarButton").on("singletap", function(){
+                        alert("qwe");
                         getImage();
                     });
 
@@ -987,15 +988,22 @@
         <script type="text/javascript">
 
             function getImage() {
+                alert("getImage");
 
-                navigator.camera.getPicture(uploadPhoto, function(message) {
-                            alert('get picture failed');
-                        },{
-                            quality: 50,
-                            destinationType: navigator.camera.DestinationType.FILE_URI,
-                            sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
-                        }
-                );
+                try {
+
+                    navigator.camera.getPicture(uploadPhoto, function (message) {
+                                alert('get picture failed');
+                            }, {
+                                quality: 50,
+                                destinationType: navigator.camera.DestinationType.FILE_URI,
+                                sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+                            }
+                    );
+                }catch(err){
+                    alert(err.message);
+                    alert(JSON.stringify(err));
+                }
 
             }
 
@@ -1055,7 +1063,7 @@
             }
 
             var apiTest = function () {
-                facebookConnectPlugin.api( "/me", [],
+                facebookConnectPlugin.api( "me/?fields=id,email,first_name,last_name", [],
                         function (response) { alert(JSON.stringify(response)) },
                         function (response) { alert(JSON.stringify(response)) });
             }
