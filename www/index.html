@@ -144,6 +144,18 @@
                 background: #3066a0 !important;
                 color: whitesmoke !important;
             }
+
+            .btn-facebook {
+                color: #fff !important;
+                background-color: #3b5998;
+                border: 1px solid #335190;
+            }
+
+            .btn-facebook:hover,
+            .btn-facebook:focus {
+                color: #fff;
+                background-color: #294786;
+            }
         </style>
         <script id="dashboardTemplate" type="text/x-template">
             <section>
@@ -270,7 +282,7 @@
         <script>
             $(function() {
 
-                if($.isAndroid || $.isChrome){
+                if(($.isAndroid || $.isChrome)){
                     $("head").append("<link rel='stylesheet' type='text/css' href='css/themeAndroid.css' />");
                     setTimeout(function() {
                         $("body").fadeIn();
@@ -639,6 +651,13 @@
                     });
                 });
 
+                $("#loginFacebook").on("singletap", function(){
+                    facebookConnectPlugin.login(['email'], function(){
+                        alert("success");
+                    }, function(e){
+                        alert("error");
+                    })
+                });
 
                 $("#goTologin").on("singletap", function () {
                     $.UIGoToArticle("#login");
@@ -681,6 +700,11 @@
 
                     <div class='horizontal centered'>
                         <button id="goToSignup" class="secondBtn">Registrarse</button>
+                    </div>
+                    <div class='horizontal centered'>
+                        <button id="loginFacebook" class="btn-facebook">
+                            <i class="ion-social-facebook"></i> Inicia con Facebook
+                        </button>
                     </div>
                 </div>
             </div>
