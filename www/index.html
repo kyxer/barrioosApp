@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
     <head>
         <meta charset="utf-8" />
        <!-- <meta name="format-detection" content="telephone=no" /> -->
@@ -13,6 +13,9 @@
         <script src="js/jquery-2.1.4.min.js"></script>
         <script src="js/chui-3.8.10.min.js"></script>
         <script src="js/jqrcode.min.js"></script>
+        <script src="js/jquery.ui.widget.js"></script>
+        <script src="js/jquery.iframe-transport.js'"></script>
+        <script src="js/jquery.fileupload.js"></script>
 
         <!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" /> -->
         <title>BarrioOS</title>
@@ -156,6 +159,19 @@
                 color: #fff;
                 background-color: #294786;
             }
+
+            input[type="file"]{
+                z-index: 999;
+                line-height: 0;
+                position: absolute;
+                opacity: 0;
+                filter: alpha(opacity = 0);-ms-filter: "alpha(opacity=0)";
+                margin: 0;
+                padding:0;
+                left:0;
+                cursor: pointer;
+            }
+
         </style>
         <script id="dashboardTemplate" type="text/x-template">
             <section>
@@ -170,7 +186,7 @@
                 </div>
                 <div class="grid gutter-5">
                     <p id="popupMessageTarget" class="attentionGrapper"></p>
-                    <div class="col flex-3">
+                    <div id="dashboardImg" class="col flex-3">
                         <img title="[[= data.first_name  ]]" src="[[= data.avatar_standar  ]]" height="150px">
                     </div>
                     <div class="col flex-3">
@@ -276,7 +292,32 @@
                             </aside>
                         </li>
                     </ul>
+                    <br>
+                    <ul class='list'>
+                        <li class='nav' id="goToAvatar">
+                            <h3>Cambiar Avatar</h3>
+                        </li>
+                    </ul>
                 </form>
+            </section>
+        </script>
+        <script id="avatarTemplate" type="text/x-template">
+            <section>
+                <div class="grid center gutter-5">
+                    <div id="avatarContainer" class="col flex-10">
+                        <img src='[[= data.avatar_standar  ]]' height="150" />
+                    </div>
+                </div>
+                <div class="grid center gutter-5">
+                    <div class="col flex-10">
+                        <form action="users/me/avatar" method="POST" >
+                            <div class='horizontal centered'>
+                                <input class="col-lg-12" id="avatarInput" name="avatar"  style="height:36px;" type="file" />
+                                <button> Seleccionar Avatar </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </section>
         </script>
         <script>
@@ -300,12 +341,18 @@
                 var optionsContent = "<ul class='list'><li id='gotToProfile' ><h3>Perfil</h3></li><li id='signOut'><h3>Cerrar Sesion</h3></li></ul>";
                 var myDashboardTmpl = $.template($("#dashboardTemplate").text());
                 var myProfileTmpl = $.template($("#profileTemplate").text());
+                var myAvatarTmpl = $.template($("#avatarTemplate").text());
 
                 var goToDashboard = function(){
+
                     $.UIGoToArticle('#dashboard');
+
+                    if($("#dashboard").text().trim()!="")
+                        return;
 
                     var user = JSON.parse(window.localStorage.getItem('user'));
                     var codeBidi = window.localStorage.getItem('codeBidi');
+                    //$('#dashboard').empty();
                     $('#dashboard').html(myDashboardTmpl(user));
 
                     if(codeBidi){
@@ -336,7 +383,16 @@
                         }, 500);
                     }
 
+                    $("#containerCodeBidi").on("singletap", function() {
 
+                        var src = $('#containerCodeBidi img').attr('src');
+
+                        showPopup('<br>' ,
+                                '<img  src="'+src+'" height="270px">',
+                                'Salir',
+                                '',
+                                'popupMessageTarget');
+                    });
                 }
 
                 var goToProfile = function(){
@@ -344,7 +400,14 @@
 
                     user = JSON.parse(window.localStorage.getItem('user'));
 
+                    if($("#profile").text().trim()!="")
+                        return;
+
                     $('#profile').html(myProfileTmpl(user));
+
+                    $("#goToAvatar").on("singletap", function(){
+                        goToAvatar('profile');
+                    });
 
                     $("#formUpdate").on("submit", function (e) {
 
@@ -401,10 +464,59 @@
                     });
                 }
 
+                var goToAvatar = function(navigation){
+
+                    $.UIGoToArticle('#avatar');
+
+                    if(navigation == 'profile') {
+                        $('#avatarBack').show();
+                    }
+                    else{
+                        $('#avatarBack').hide();
+                    }
+
+                    if($("#avatar").text().trim()!="")
+                        return;
+
+                    var user = JSON.parse(window.localStorage.getItem('user'));
+                    $('#avatar').html(myAvatarTmpl(user));
+
+                    $.ajaxSetup({
+                        headers: { 'Authorization': 'Bearer ' + user.token }
+                    });
+
+                    $('#avatarInput').fileupload({
+                        dataType: 'json',
+                        url: 'http://des.barrioosger.com/api/users/me/avatar',
+                        done: function (e, response) {
+                            window.localStorage.setItem("user", JSON.stringify(response.result));
+                            var img = '<img src="'+response.result.avatar_standar+'" height="150" />';
+                            $('#avatarContainer').html(img);
+                            $('#dashboardImg').html(img);
+
+                        },
+                        progressall: function (e, data) {
+                            var progress = parseInt(data.loaded / data.total * 100, 10);
+                        }
+                    });
+
+                    $('#avatarDone').on('singletap', function (){
+                        if(navigation == 'profile') {
+                            $.UIGoBackToArticle('#profile');
+                        }
+                        else{
+                            $.UIGoToArticle('#dashboard');
+                        }
+                    });
+
+
+                }
+
+
                 var doAjax = function(options){
                     var user = JSON.parse(window.localStorage.getItem('user'));
 
-                    var url = "http://www.proyectodes.net/api/";
+                    var url = "http://des.barrioosger.com/api/";
 
                     if(user){
                         $.ajaxSetup({
@@ -522,7 +634,7 @@
                             $("#formRegister")[0].reset();
                             $('.popup').UIPopupClose();
                             window.localStorage.setItem("user", JSON.stringify(response));
-                            goToDashboard();
+                            goToAvatar();
 
                         },
                         error:function(response){
@@ -605,16 +717,7 @@
                     this.textContent = "";
                 });
 
-                $("#containerCodeBidi").on("singletap", function() {
 
-                    var src = $('#containerCodeBidi img').attr('src');
-
-                    showPopup('<br>' ,
-                            '<img  src="'+src+'" height="270px">',
-                            'Salir',
-                            '',
-                            'popupMessageTarget');
-                });
 
                 var popoverEventHandler = function() {
 
@@ -683,6 +786,7 @@
             });
         </script>
     </head>
+
     <body style="display: none">
         <nav>
             <h1>BarrioOS</h1>
@@ -819,8 +923,17 @@
                 </ul>
                     <button type="submit" class='action secondBtn'>Registrarse</button>
                 </form>
+            </section>
+        </article>
+        <nav>
+            <button id="avatarBack" class="back"></button>
+            <h1>Seleccionar Avatar</h1>
+            <button id="avatarDone">Hecho</button>
+        </nav>
+        <article id="avatar">
 
-        </section>
+
+
         </article>
         <nav class="next">
             <button class="back">Iniciar</button>
