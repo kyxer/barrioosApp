@@ -309,12 +309,11 @@
                 </div>
                 <div class="grid center gutter-5">
                     <div class="col flex-10">
-                        <form action="users/me/avatar" method="POST" >
                             <div class='horizontal centered'>
                                 <!--<input id="avatarInput" name="avatar"  style="height:40px;" type="file" />-->
                                 <button id="avatarButton"> Seleccionar Avatar </button>
                             </div>
-                        </form>
+
                     </div>
                 </div>
             </section>
@@ -988,7 +987,7 @@
         <script type="text/javascript">
 
             function getImage() {
-                // Retrieve image file location from specified source
+
                 navigator.camera.getPicture(uploadPhoto, function(message) {
                             alert('get picture failed');
                         },{
@@ -1001,6 +1000,7 @@
             }
 
             function uploadPhoto(imageURI) {
+                alert("en el upload");
                 var options = new FileUploadOptions();
                 options.fileKey="avatar";
                 options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
@@ -1055,7 +1055,7 @@
             }
 
             var apiTest = function () {
-                facebookConnectPlugin.api( "me/?fields=id,email,first_name,last_name,avatar_original,avatar", [],
+                facebookConnectPlugin.api( "/me", [],
                         function (response) { alert(JSON.stringify(response)) },
                         function (response) { alert(JSON.stringify(response)) });
             }
