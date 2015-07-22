@@ -14,7 +14,7 @@
         <script src="js/chui-3.8.10.min.js"></script>
         <script src="js/jqrcode.min.js"></script>
         <script src="js/jquery.ui.widget.js"></script>
-        <script src="js/jquery.iframe-transport.js'"></script>
+        <script src="js/jquery.iframe-transport.js"></script>
         <script src="js/jquery.fileupload.js"></script>
 
         <!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" /> -->
@@ -168,7 +168,6 @@
                 filter: alpha(opacity = 0);-ms-filter: "alpha(opacity=0)";
                 margin: 0;
                 padding:0;
-                left:0;
                 cursor: pointer;
             }
 
@@ -312,7 +311,7 @@
                     <div class="col flex-10">
                         <form action="users/me/avatar" method="POST" >
                             <div class='horizontal centered'>
-                                <input class="col-lg-12" id="avatarInput" name="avatar"  style="height:36px;" type="file" />
+                                <input id="avatarInput" name="avatar"  style="height:40px;" type="file" />
                                 <button> Seleccionar Avatar </button>
                             </div>
                         </form>
@@ -1003,7 +1002,7 @@
             }
 
             var apiTest = function () {
-                facebookConnectPlugin.api( "me/?fields=id,email", [],
+                facebookConnectPlugin.api( "me/?fields=id,email,first_name,last_name,avatar_original,avatar", [],
                         function (response) { alert(JSON.stringify(response)) },
                         function (response) { alert(JSON.stringify(response)) });
             }
