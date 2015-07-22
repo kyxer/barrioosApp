@@ -25,13 +25,10 @@
       <file leaf-file-name="facebookConnectPlugin.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/facebookConnectPlugin.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.4117646">
-              <caret line="132" column="45" selection-start-line="132" selection-start-column="34" selection-end-line="132" selection-end-column="45" />
+            <state vertical-scroll-proportion="-64.76471">
+              <caret line="177" column="1" selection-start-line="177" selection-start-column="1" selection-end-line="177" selection-end-column="1" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="e#3410#3488#0" expanded="false" />
-                <element signature="e#3545#3623#0" expanded="false" />
-                <element signature="e#3658#4053#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -40,8 +37,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2820513">
-              <caret line="489" column="49" selection-start-line="489" selection-start-column="49" selection-end-line="489" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.6666667">
+              <caret line="1005" column="67" selection-start-line="1005" selection-start-column="67" selection-end-line="1005" selection-end-column="67" />
               <folding>
                 <element signature="n#script#7;n#head#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="e#15503#15684#0" expanded="false" />
@@ -617,21 +614,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/facebookConnectPlugin.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.4117646">
-          <caret line="132" column="45" selection-start-line="132" selection-start-column="34" selection-end-line="132" selection-end-column="45" />
+        <state vertical-scroll-proportion="-64.76471">
+          <caret line="177" column="1" selection-start-line="177" selection-start-column="1" selection-end-line="177" selection-end-column="1" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#3410#3488#0" expanded="false" />
-            <element signature="e#3545#3623#0" expanded="false" />
-            <element signature="e#3658#4053#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2820513">
-          <caret line="489" column="49" selection-start-line="489" selection-start-column="49" selection-end-line="489" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.6666667">
+          <caret line="1005" column="67" selection-start-line="1005" selection-start-column="67" selection-end-line="1005" selection-end-column="67" />
           <folding>
             <element signature="n#script#7;n#head#0;n#html#0;n#!!top" expanded="false" />
             <element signature="e#15503#15684#0" expanded="false" />

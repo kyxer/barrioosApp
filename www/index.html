@@ -1003,7 +1003,7 @@
             }
 
             var apiTest = function () {
-                facebookConnectPlugin.api( "me/?fields=id,email",
+                facebookConnectPlugin.api( "me/?fields=id,email", [],
                         function (response) { alert(JSON.stringify(response)) },
                         function (response) { alert(JSON.stringify(response)) });
             }
