@@ -758,6 +758,9 @@
                     $("#signOut").on("singletap", function(){
                         window.localStorage.removeItem("user");
                         window.localStorage.removeItem("codeBidi");
+                        $("#dashboard").html('');
+                        $("#avatar").html('');
+                        $("#profile").html('');
                         $.UIGoBackToArticle("#main");
                     });
 
