@@ -346,7 +346,7 @@
 
                     if($("#dashboard").text().trim()!="")
                         return;
-
+                    alert("qwe");
                     var user = JSON.parse(window.localStorage.getItem('user'));
                     var codeBidi = window.localStorage.getItem('codeBidi');
                     //$('#dashboard').empty();
@@ -383,8 +383,11 @@
                     $("#containerCodeBidi").on("singletap", function() {
 
                         var src = $('#containerCodeBidi img').attr('src');
-
-                        showPopup( user.bidicode.toString() ,
+                        var show = "<br>";
+                        if(user.bidicode){
+                            show = user.bidicode.toString();
+                        }
+                        showPopup( show ,
                                 '<img  src="'+src+'" height="270px">',
                                 'Salir',
                                 '',
@@ -494,7 +497,7 @@
                             else
                             {
                                 setTimeout(function() {
-                                    $.UIGoToArticle('#dashboard');
+                                    goToDashboard();
                                 }, 300);
 
                             }
@@ -531,7 +534,7 @@
                                     else
                                     {
                                         setTimeout(function() {
-                                            $.UIGoToArticle('#dashboard');
+                                            goToDashboard();
                                         }, 300);
 
                                     }
@@ -548,8 +551,6 @@
                                 }
                             });
                         }
-
-
                     });
                 };
 
@@ -558,7 +559,7 @@
                 var doAjax = function(options){
                     var user = JSON.parse(window.localStorage.getItem('user'));
 
-                    var url = "http://www.protectodes.com/api/";
+                    var url = "http://www.proyectodes.net/api/";
 
                     if(user){
                         $.ajaxSetup({
