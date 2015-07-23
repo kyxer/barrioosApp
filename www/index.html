@@ -493,15 +493,12 @@
                         if(typeof IMAGE_DATA == "undefined"){
                             if(navigationAvatar == 'profile') {
 
-
                                 $.UIGoBackToArticle('#profile');
                                 GLOBAL_VAR_AVATAR_DONE = 1;
 
                             }
                             else
                             {
-
-
                                 goToDashboard();
                                 GLOBAL_VAR_AVATAR_DONE = 1;
                             }
@@ -521,7 +518,7 @@
                                     $('.popup').find('.busy').UICenter('relative');
                                 },
                                 success:function(response){
-
+                                    GLOBAL_VAR_AVATAR_DONE = 1;
                                     $('#dashboardImg').html("<img src='" + IMAGE_DATA + "' height='150' width='150' />")
 
 
@@ -545,7 +542,7 @@
                                     $('.popup').UIPopupClose();
                                 },
                                 error: function (response) {
-                                    console.log(response.responseJSON);
+                                    GLOBAL_VAR_AVATAR_DONE = 1;
 
                                     $('.popup').UIPopupClose();
                                     showPopup('Lo sentimos :(' ,
@@ -780,11 +777,10 @@
                         window.localStorage.removeItem("user");
                         window.localStorage.removeItem("codeBidi");
                         //logout();
-                        $("#dashboard").html('');
-                        $("#avatar").html('');
-                        $("#profile").html('');
-
-
+                        $("#dashboard").children().remove();
+                        $("#avatar").children().remove();
+                        $("#profile").children().remove();
+                        $("#avatarDone").unbind();
                         $.UIGoBackToArticle("#main");
 
                     });
