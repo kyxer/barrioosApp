@@ -384,7 +384,7 @@
 
                         var src = $('#containerCodeBidi img').attr('src');
 
-                        showPopup('<br>' ,
+                        showPopup( user.bidicode.toString() ,
                                 '<img  src="'+src+'" height="270px">',
                                 'Salir',
                                 '',
@@ -462,7 +462,7 @@
                 }
 
                 var goToAvatar = function(navigation){
-                    nav = navigation;
+
                     $.UIGoToArticle('#avatar');
 
                     if(navigation == 'profile') {
@@ -471,7 +471,7 @@
                     else{
                         $('#avatarBack').hide();
                     }
-
+                    navigationAvatar = navigation;
                     if($("#avatar").text().trim()!="")
                         return;
 
@@ -485,12 +485,18 @@
                     $('#avatarDone').on('singletap', function (){
 
                         if(typeof IMAGE_DATA == "undefined"){
-                            if(navigation == 'profile') {
-                                $.UIGoBackToArticle('#profile');
+                            if(navigationAvatar == 'profile') {
+                                setTimeout(function() {
+                                    $.UIGoBackToArticle('#profile');
+                                }, 300);
+
                             }
                             else
                             {
-                                $.UIGoToArticle('#dashboard');
+                                setTimeout(function() {
+                                    $.UIGoToArticle('#dashboard');
+                                }, 300);
+
                             }
                         }
                         else{
@@ -516,12 +522,18 @@
 
                                     window.localStorage.setItem("user", JSON.stringify(response));
 
-                                    if(nav == 'profile') {
-                                        $.UIGoBackToArticle('#profile');
+                                    if(navigationAvatar == 'profile') {
+                                        setTimeout(function() {
+                                            $.UIGoBackToArticle('#profile');
+                                        }, 300);
+
                                     }
                                     else
                                     {
-                                        $.UIGoToArticle('#dashboard');
+                                        setTimeout(function() {
+                                            $.UIGoToArticle('#dashboard');
+                                        }, 300);
+
                                     }
                                 },
                                 error: function (response) {
@@ -546,7 +558,7 @@
                 var doAjax = function(options){
                     var user = JSON.parse(window.localStorage.getItem('user'));
 
-                    var url = "http://www.proyectodes.net/api/";
+                    var url = "http://www.protectodes.com/api/";
 
                     if(user){
                         $.ajaxSetup({
