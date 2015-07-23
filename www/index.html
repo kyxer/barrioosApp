@@ -171,9 +171,25 @@
                 cursor: pointer;
             }
 
+            .backgroundDashboard{
+
+                background: rgba(17,44,75,1);
+                background: -moz-linear-gradient(left, rgba(17,44,75,1) 7%, rgba(17,44,75,1) 7%, rgba(23,51,84,1) 11%, rgba(115,172,230,1) 76%, rgba(115,172,230,1) 80%);
+                background: -webkit-gradient(left top, right top, color-stop(7%, rgba(17,44,75,1)), color-stop(7%, rgba(17,44,75,1)), color-stop(11%, rgba(23,51,84,1)), color-stop(76%, rgba(115,172,230,1)), color-stop(80%, rgba(115,172,230,1)));
+                background: -webkit-linear-gradient(left, rgba(17,44,75,1) 7%, rgba(17,44,75,1) 7%, rgba(23,51,84,1) 11%, rgba(115,172,230,1) 76%, rgba(115,172,230,1) 80%);
+                background: -o-linear-gradient(left, rgba(17,44,75,1) 7%, rgba(17,44,75,1) 7%, rgba(23,51,84,1) 11%, rgba(115,172,230,1) 76%, rgba(115,172,230,1) 80%);
+                background: -ms-linear-gradient(left, rgba(17,44,75,1) 7%, rgba(17,44,75,1) 7%, rgba(23,51,84,1) 11%, rgba(115,172,230,1) 76%, rgba(115,172,230,1) 80%);
+                background: linear-gradient(to right, rgba(17,44,75,1) 7%, rgba(17,44,75,1) 7%, rgba(23,51,84,1) 11%, rgba(115,172,230,1) 76%, rgba(115,172,230,1) 80%);
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#112c4b', endColorstr='#73ace6', GradientType=1 );
+            }
+
+            .backgroundDashboard p {
+                color: white !important;
+            }
+
         </style>
         <script id="dashboardTemplate" type="text/x-template">
-            <section>
+            <section class="backgroundDashboard">
                 <div class="grid gutter-5">
                     <div class="col flex-3">
                         <p>Vecino de</p>
@@ -1016,7 +1032,7 @@
             <h1>BarrioOS Inicio</h1>
             <button class='show-popover button' id="showOptions">opciones</button>
         </nav>
-        <article id="dashboard" class="next">
+        <article id="dashboard">
 
         </article>
         <nav>
