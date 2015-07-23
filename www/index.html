@@ -310,7 +310,6 @@
                 <div class="grid center gutter-5">
                     <div class="col flex-10">
                             <div class='horizontal centered'>
-                                <!--<input id="avatarInput" name="avatar"  style="height:40px;" type="file" />-->
                                 <button id="avatarButton"> Seleccionar Avatar </button>
                             </div>
 
@@ -463,7 +462,7 @@
                 }
 
                 var goToAvatar = function(navigation){
-
+                    nav = navigation;
                     $.UIGoToArticle('#avatar');
 
                     if(navigation == 'profile') {
@@ -480,42 +479,68 @@
                     $('#avatar').html(myAvatarTmpl(user));
 
                     $("#avatarButton").on("singletap", function(){
-                        alert("qwe");
                         getImage();
                     });
 
-                    /*$.ajaxSetup({
-                        headers: { 'Authorization': 'Bearer ' + user.token }
-                    });
-
-                    $('#avatarInput').fileupload({
-                        dataType: 'json',
-                        url: 'http://www.proyectodes.net/api/users/me/avatar',
-                        done: function (e, response) {
-                            window.localStorage.setItem("user", JSON.stringify(response.result));
-                            var img = '<img src="'+response.result.avatar_standar+'" height="150" />';
-                            $('#avatarContainer').html(img);
-                            $('#dashboardImg').html(img);
-
-                        },
-                        progressall: function (e, data) {
-                            var progress = parseInt(data.loaded / data.total * 100, 10);
-                        }
-                    });*/
-
-
-
                     $('#avatarDone').on('singletap', function (){
-                        if(navigation == 'profile') {
-                            $.UIGoBackToArticle('#profile');
+
+                        if(typeof IMAGE_DATA == "undefined"){
+                            if(navigation == 'profile') {
+                                $.UIGoBackToArticle('#profile');
+                            }
+                            else
+                            {
+                                $.UIGoToArticle('#dashboard');
+                            }
                         }
                         else{
-                            $.UIGoToArticle('#dashboard');
+                            $.ajaxSetup({
+                                headers: { 'Authorization': 'Bearer ' + user.token }
+                            });
+
+                            $.ajax({
+                                url: "http://www.proyectodes.net/api/users/me/avatar",
+                                type: "POST",
+                                data: { avatar: IMAGE_DATA.toString() },
+                                beforeSend:function(){
+                                    $.UIPopup({empty: true});
+                                    $('.popup .panel').UIBusy({'color':'#1f344a', 'size': 80});
+                                    $('.popup').find('.busy').UICenter('relative');
+                                },
+                                success:function(){
+
+                                    $('#dashboardImg').html("<img src='" + IMAGE_DATA + "' height='150' width='150' />")
+                                    $('.popup').UIPopupClose();
+
+                                    IMAGE_DATA = undefined;
+
+                                    window.localStorage.setItem("user", JSON.stringify(response));
+
+                                    if(nav == 'profile') {
+                                        $.UIGoBackToArticle('#profile');
+                                    }
+                                    else
+                                    {
+                                        $.UIGoToArticle('#dashboard');
+                                    }
+                                },
+                                error: function (response) {
+
+                                    $('.popup').UIPopupClose();
+                                    showPopup('Lo sentimos :(' ,
+                                            'Algo ha salido mal intenta subir el avatar nuevamente',
+                                            'Hecho',
+                                            '',
+                                            'popupRegister');
+
+                                }
+                            });
                         }
+
+
                     });
+                };
 
-
-                }
 
 
                 var doAjax = function(options){
@@ -988,58 +1013,43 @@
         <script type="text/javascript">
 
             function getImage() {
-                alert("getImage");
 
                 try {
 
-                    navigator.camera.getPicture(uploadPhoto, function (message) {
-                                alert('get picture failed');
-                            }, {
-                                quality: 50,
-                                destinationType: navigator.camera.DestinationType.FILE_URI,
-                                sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+                    navigator.camera.getPicture(
+                            function(imageData){
+                                readMedia(imageData)
+                            },
+                            function(error){
+                                showPopup('Lo sentimos :(' ,
+                                        'Algo ha salido ha salido mal, estamos corrigiendo todos los errores lo más pronto posible',
+                                        'Hecho',
+                                        '',
+                                        'popupRegister');
+
+                                return false;
+                                //navigator.notification.alert('Error code: ' + error.code, null, 'Capture Error');
+                            },
+                            {
+                                quality: 80,
+                                allowEdit : true,
+                                destinationType: Camera.DestinationType.FILE_URI,
+                                sourceType:Camera.PictureSourceType.SAVEDPHOTOALBUM,
+                                encodingType: Camera.EncodingType.JPEG,
+                                targetWidth: 150,
+                                targetHeight: 150,
+                                mediaType:2
                             }
                     );
                 }catch(err){
-                    alert(err.message);
-                    alert(JSON.stringify(err));
+
+                    showPopup('Lo sentimos :(' ,
+                            'Algo ha salido ha salido mal, estamos corrigiendo todos los errores lo más pronto posible',
+                            'Hecho',
+                            '',
+                            'popupRegister');
                 }
-
             }
-
-            function uploadPhoto(imageURI) {
-                alert("en el upload");
-                var options = new FileUploadOptions();
-                options.fileKey="avatar";
-                options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
-                options.mimeType="image/jpeg";
-
-                alert(options.fileName);
-
-                var params = new Object();
-
-                var user = JSON.parse(window.localStorage.getItem('user'));
-
-                params.headers={'Authorization':'Bearer ' + user.token};
-
-                var ft = new FileTransfer();
-                ft.upload(imageURI, encodeURI("http://www.proyectodes.net/api/users/me/avatar"), win, fail, options);
-            }
-
-            function win(r) {
-                alert(JSON.stringify(r.response));
-                console.log("Code = " + r.responseCode);
-                console.log("Response = " + r.response);
-                console.log("Sent = " + r.bytesSent);
-            }
-
-            function fail(error) {
-                alert(JSON.stringify(error.source));
-                alert("An error has occurred: Code = " + error.code);
-                console.log("upload error source " + error.source);
-                console.log("upload error target " + error.target);
-            }
-
 
             var login = function () {
                 if (!window.cordova) {
@@ -1127,6 +1137,31 @@
                         function (response) { alert(JSON.stringify(response)) },
                         function (response) { alert(JSON.stringify(response)) });
             }
+
+            function readMedia(archivo){
+
+                var imagenURL=archivo;
+
+                window.resolveLocalFileSystemURL = window.resolveLocalFileSystemURL || window.webkitResolveLocalFileSystemURL;
+                window.resolveLocalFileSystemURL(imagenURL, function(fileEntry) {
+                    fileEntry.file(function(file){
+                        var reader = new FileReader();
+                        reader.onloadend = function(evt) {
+
+                            IMAGE_DATA=evt.target.result;
+                            $("#avatarContainer").html("<img src='" + IMAGE_DATA + "' height='150' width='150' />");
+
+
+                        };
+                        reader.readAsDataURL(file);
+                    }, function(e){
+                        alert(JSON.stringify(e));
+                    })
+                });
+
+                return false;
+            }
+
         </script>
     </body>
 </html>
