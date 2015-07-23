@@ -1093,13 +1093,15 @@
                                     $('.popup .panel').UIBusy({'color':'#1f344a', 'size': 80});
                                     $('.popup').find('.busy').UICenter('relative');
                                 },
-                                success: function(){
+                                success: function(response){
                                     $('.popup').UIPopupClose();
                                     window.localStorage.setItem("user", JSON.stringify(response));
                                     goToDashboard();
                                 },
-                                error: function(){
+                                error: function(e){
+
                                     $('.popup').UIPopupClose();
+                                    alert(JSON.stringify(e.responseJSON));
 
                                     showPopup('Lo sentimos :(' ,
                                             'Algo ha salido mal intenta iniciar nuevamente',
