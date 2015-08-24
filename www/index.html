@@ -85,7 +85,7 @@
                             <div class="form-group">
                                 <label for="postal_code" class="col-xs-4 control-label" id="r-con">Código Postal</label>
                                 <div class="col-xs-8">
-                                    <input id="postalCodeUpdate" name="postal_code" type="text" value="[[= data.postal_code ]]" pattern="^\d+$" title="Solo números" autocapitalize="off" autocorrect="off" class="form-control" class="form-control" required>
+                                    <input id="postalCodeUpdate" name="postal_code" type="text" value="[[= data.postal_code ]]" pattern="^\d+$" title="Solo números" autocapitalize="off" autocorrect="off" class="form-control" maxlength="5" required>
                                     <span data-error="postal_code"></span>
                                 </div>
                             </div>
@@ -599,6 +599,7 @@
                     var sidebar = document.getElementById("sidebar");
                     if(sidebar.style.left == "-200px"){
                         sidebar.style.left = "0px";
+                        sidebar.style.display = "block";
                     }
                     else
                     {
@@ -646,8 +647,18 @@
                     $("#avatar").children().remove();
                     $("#profile").children().remove();
                     $("#avatarDone").unbind();
-                    $.UIGoBackToArticle("#main");
+                    sidebar = document.getElementById("sidebar");
+                    sidebar.style.left = "-200px";
 
+                    $.UIPopup({empty: true});
+                    $('.popup .panel').UIBusy({'color':'#1f344a', 'size': 80});
+                    $('.popup').find('.busy').UICenter('relative');
+
+                    setTimeout(function(){
+                        $('.popup').UIPopupClose();
+                        sidebar.style.display = "none";
+                        $.UIGoBackToArticle("#main");
+                    },1000);
                 });
 
                $("body").on("singletap",function(e){
@@ -1091,7 +1102,7 @@
                         reader.onloadend = function(evt) {
 
                             IMAGE_DATA=evt.target.result;
-                            $("#avatarContainer").html("<img src='" + IMAGE_DATA + "' height='150' width='150' />");
+                            $("#avatarContainer").html("<img src='" + IMAGE_DATA + "' class='img-circle margin' />");
 
 
                         };
