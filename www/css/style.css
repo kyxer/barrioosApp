@@ -87,14 +87,14 @@ font-size: 4vh;
     font-size: 31px;
 }
 
-#b-barrioos {
-    float: right;
+.b-barrioos {
+    float: right !important;
     padding-top: 0;
     padding-right: 5px;
     margin-top: -3px;
 }
 
-#b-barrioos img{
+.b-barrioos img{
 
     max-width: 40px;
     height: auto;
