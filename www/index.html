@@ -13,13 +13,15 @@
         <script src="js/jquery-2.1.4.min.js"></script>
         <script src="js/chui-3.8.10.min.js"></script>
         <script src="js/jqrcode.min.js"></script>
-        <script src="js/jquery.ui.widget.js"></script>
-        <script src="js/jquery.iframe-transport.js"></script>
-        <script src="js/jquery.fileupload.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/responsive.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/menu.css">
 
         <!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" /> -->
         <title>BarrioOS</title>
-        <style type="text/css" media="all">
+       <!-- <style type="text/css" media="all">
             /* Set background color for invalid inputs: */
             input:focus:invalid {
                 background-color: rgba(225,0,0,0.05);
@@ -86,7 +88,7 @@
                 margin-bottom: 20px;
             }
 
-        /*For raiting*/
+            /*For raiting*/
             .rating {
 
                 unicode-bidi: bidi-override;
@@ -187,10 +189,34 @@
                 color: white !important;
             }
 
-        </style>
+        </style> -->
         <script id="dashboardTemplate" type="text/x-template">
-            <section class="backgroundDashboard">
-                <div class="grid gutter-5">
+            <section class="tarjeta">
+                <div class="row">
+                    <div class="col-xs-12 text-left">
+                        <h3 class="text-left">Vecino de</h3>
+                        <h2 class="localidad">[[= data.barrio ]]</h2>
+                    </div>
+                </div>
+                <div class="row qr">
+                    <div class="col-xs-5">
+                        <a href="avatar.html">
+                            <img src="[[= data.avatar_standar  ]]" alt="[[= data.first_name  ]]" class="img-circle"  style="margin-top:2vh;">
+                        </a>
+                    </div>
+                    <div class="col-xs-7">
+                        <h2>[[= data.first_name  ]]</h2>
+                        <h1><i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i></h1>
+                        <h4>[[= data.rating  ]]</h4>
+                    </div>
+                </div>
+                <div style="display: none" id="containerCodeBidi" class="col-xs-12 text-center">
+                </div>
+                <!--<div class="grid gutter-5">
                     <div class="col flex-3">
                         <p>Vecino de</p>
                         <p>[[= data.barrio ]]</p>
@@ -212,11 +238,75 @@
                         <br>
                         <div style="display: none" id="containerCodeBidi"></div>
                     </div>
-                </div>
+                </div> -->
             </section>
         </script>
         <script id="profileTemplate" type="text/x-template">
-            <section>
+            <section class="perfil">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p id="popupUpdate" class="attentionGrapper"></p>
+                        <form id="formUpdate" action="users/me" method="PUT" class="form-horizontal">
+                            <div class="form-group">
+                                <label for="first_name" class="col-xs-4 control-label">Nombre</label>
+                                <div class="col-xs-8">
+                                    <input id="firstNameUpdate" name="first_name" value="[[= data.first_name ]]" type="text" autocapitalize="words" class="form-control" autocorrect="off" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="last_name" class="col-xs-4 control-label">Apellidos</label>
+                                <div class="col-xs-8">
+                                    <input id="lastNameUpdate" name="last_name" value="[[= data.last_name ]]" type="text" autocapitalize="words" class="form-control" autocorrect="off" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="col-xs-4 control-label">Correo</label>
+                                <div class="col-xs-8">
+                                  <input id="emailUpdate" name="email" type="email" value="[[= data.email ]]" pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" title="example@dominio.com"  autocapitalize="off" autocorrect="off" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email_confirmation" class="col-xs-4 control-label">Repita Correo</label>
+                                <div class="col-xs-8">
+                                  <input id="emailUpdateRe" name="email_confirmation" type="email" value="[[= data.email ]]" pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" title="example@dominio.com" autocapitalize="off" autocorrect="off" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="postal_code" class="col-xs-4 control-label" id="r-con">Código Postal</label>
+                                <div class="col-xs-8">
+                                    <input id="postalCodeUpdate" name="postal_code" type="text" value="[[= data.postal_code ]]" pattern="^\d+$" title="Solo números" autocapitalize="off" autocorrect="off" class="form-control" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="col-xs-4 control-label">Teléfono</label>
+                                <div class="col-xs-8">
+                                  <input id="phoneUpdate" name="phone" type="text" value="[[= data.phone ]]" maxlength="20" autocapitalize="off" class="form-control" autocorrect="off">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address" class="col-xs-4 control-label">Dirección</label>
+                                <div class="col-xs-8">
+                                  <textarea id="addressUpdate" name="address" type="text" maxlength="200" class="form-control" autocorrect="off">[[= data.address ]]</textarea>
+                                </div>
+                            </div>
+                            <div class="col-xs-offset-4 col-xs-8">
+                            <a id="goToAvatar" class="btn btn-default btn-block" id="cambiaravatar">Cambiar Avatar</a>
+                            </div>
+                            </div>
+
+
+                            <div class="form-group">
+                            <div class="col-xs-12 text-center">
+                              <button id="executeUpdate" class="btn btn-primary btn-lg btn-block">Guardar Cambios</button>
+                            </div>
+                            </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--<section>
                 <p id="popupUpdate" class="attentionGrapper"></p>
                 <h2>Edita tu información</h2>
                 <form id="formUpdate" action="users/me" method="PUT" >
@@ -257,25 +347,6 @@
                                 <input id="emailUpdateRe" name="email_confirmation" type="email" value="[[= data.email ]]" pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" title="example@dominio.com" autocapitalize="off" autocorrect="off" required>
                             </aside>
                         </li>
-                        <!--<li class='comp'>
-                            <div>
-                                <label for='passwordUpdate'>Contraseña:</label>
-                                <span data-error="password"></span>
-                            </div>
-                            <aside>
-                                <input id="passwordUpdate" name="password" type="password" value="" maxlength="16" autocapitalize="off" autocorrect="off" required>
-                            </aside>
-                        </li>
-                        <li class='comp'>
-                            <div>
-                                <label for='passwordReUpdate'>Repita Contraseña:</label>
-                                <span data-error="password_confirmation"></span>
-                            </div>
-                            <aside>
-                                <input id="passwordReUpdate" name="password_confirmation" type="password"
-                                       value="" maxlength="16" autocapitalize="off" autocorrect="off" required>
-                            </aside>
-                        </li> -->
                         <li class='comp'>
                             <div>
                                 <label for='postalCodeUpdate'>Código Postal:</label>
@@ -314,10 +385,20 @@
                         </li>
                     </ul>
                 </form>
-            </section>
+            </section> -->
         </script>
         <script id="avatarTemplate" type="text/x-template">
-            <section>
+            <section class="qr-sec">
+                <div class="row">
+                    <div id="avatarContainer" class="col-xs-12 text-center">
+                            <img src="[[= data.avatar_standar  ]]" alt="Persona" class="img-circle margin">
+                    </div>
+                    <div class="col-xs-12 text-center">
+                            <a id="avatarButton" class="btn btn-primary btn-lg">Seleccionar Avatar</a>
+                    </div>
+                </div>
+            </section>
+            <!--<section>
                 <div class="grid center gutter-5">
                     <div id="avatarContainer" class="col flex-10">
                         <img src='[[= data.avatar_standar  ]]' height="150" />
@@ -331,30 +412,47 @@
 
                     </div>
                 </div>
+            </section> -->
+        </script>
+        <script id="qrCodeTemplate" type="text/x-template">
+            <section class="qr-sec">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="embajador text-center">
+                            <img src="[[= data.code  ]]" alt="QR">
+                            <h2>[[= data.number  ]]</h2>
+                        </div>
+                    </div>
+                </div>
             </section>
         </script>
         <script>
             $(function() {
 
-                if((($.isAndroid || $.isChrome))){
+                setTimeout(function() {
+                        $("body").fadeIn();
+                    });
+
+                //if($.isAndroid || $.isChrome){
                     $("head").append("<link rel='stylesheet' type='text/css' href='css/themeAndroid.css' />");
                     setTimeout(function() {
                         $("body").fadeIn();
                     });
-                }
+                /*}
                 else{
                     $("head").append("<link rel='stylesheet' type='text/css' href='css/themeIos.css' />");
                     setTimeout(function() {
                         $("body").fadeIn();
                     });
-                }
+                }*/
 
                 var user = JSON.parse(window.localStorage.getItem('user'));
                 console.log(user);
-                var optionsContent = "<ul class='list'><li id='gotToProfile' ><h3>Perfil</h3></li><li id='signOut'><h3>Cerrar Sesion</h3></li></ul>";
+                /*var optionsContent = "<ul class='list'><li id='goToProfile' ><h3>Perfil</h3></li><li id='signOut'><h3>Cerrar Sesion</h3></li></ul>";*/
                 var myDashboardTmpl = $.template($("#dashboardTemplate").text());
                 var myProfileTmpl = $.template($("#profileTemplate").text());
                 var myAvatarTmpl = $.template($("#avatarTemplate").text());
+                var myQrCodeTmpl = $.template($("#qrCodeTemplate").text());
 
                 goToDashboard = function(){
 
@@ -365,11 +463,9 @@
 
                     var user = JSON.parse(window.localStorage.getItem('user'));
                     var codeBidi = window.localStorage.getItem('codeBidi');
-                    //$('#dashboard').empty();
                     $('#dashboard').html(myDashboardTmpl(user));
-
                     if(codeBidi){
-                        $("#containerCodeBidi").html('<img src="'+ codeBidi +'" height="80px" />');
+                        $("#containerCodeBidi").html('<img src="'+ codeBidi +'" class="qr-img" />');
                         $("#containerCodeBidi").fadeIn();
                     }
                     else
@@ -383,13 +479,13 @@
                                 colorLight : "#ffffff",
                                 correctLevel : QRCode.CorrectLevel.H
                             });
-                            $('#containerCodeBidi img').attr({
+                            /*$('#containerCodeBidi img').attr({
                                 height:'80px'
-                            });
+                            });*/
 
                             setTimeout(function(){
                                 window.localStorage.setItem('codeBidi',$('#containerCodeBidi img').attr('src'));
-                                $("#containerCodeBidi").html('<img src="'+ $('#containerCodeBidi img').attr('src') +'" height="80px" />');
+                                $("#containerCodeBidi").html('<img src="'+ $('#containerCodeBidi img').attr('src') +'" class="qr-img" />');
                                 $("#containerCodeBidi").fadeIn();
                             },500)
 
@@ -398,16 +494,20 @@
 
                     $("#containerCodeBidi").on("singletap", function() {
 
-                        var src = $('#containerCodeBidi img').attr('src');
-                        var show = "<br>";
-                        if(user.bidicode){
-                            show = user.bidicode.toString();
-                        }
-                        showPopup( show ,
+                        $.UIGoToArticle("#qrCode");
+                        if($("#qrCode").text().trim()!="")
+                            return;
+
+                        $('#qrCode').html(myQrCodeTmpl({
+                            number: user.bidicode.toString(),
+                            code:$('#containerCodeBidi img').attr('src')
+                        }));
+
+                        /*showPopup( show ,
                                 '<img  src="'+src+'" height="270px">',
                                 'Salir',
                                 '',
-                                'popupMessageTarget');
+                                'popupMessageTarget');*/
                     });
                 }
 
@@ -525,7 +625,7 @@
                             });
 
                             $.ajax({
-                                url: "http://www.proyectodes.net/api/users/me/avatar",
+                                url: "http://des.barrioosger.com/api/users/me/avatar",
                                 type: "POST",
                                 data: { avatar: IMAGE_DATA.toString() },
                                 beforeSend:function(){
@@ -578,7 +678,7 @@
                 var doAjax = function(options){
                     var user = JSON.parse(window.localStorage.getItem('user'));
 
-                    var url = "http://www.proyectodes.net/api/";
+                    var url = "http://des.barrioosger.com/api/";
 
                     if(user){
                         $.ajaxSetup({
@@ -781,9 +881,9 @@
 
 
 
-                var popoverEventHandler = function() {
+                /*var popoverEventHandler = function() {
 
-                    $("#gotToProfile").on("singletap", function () {
+                    $("#goToProfile").on("singletap", function () {
                         goToProfile();
                     });
 
@@ -802,27 +902,27 @@
                     });
 
                     $('.popover').on('singletap', function(e) {
-                        if ($.isAndroid || $.isChrome) {
-                            setTimeout(function() {
+                            if ($.isAndroid || $.isChrome) {
+                                setTimeout(function() {
+                                    $.UIPopoverClose();
+                                }, 300);
+                            } else {
                                 $.UIPopoverClose();
-                            }, 300);
-                        } else {
-                            $.UIPopoverClose();
-                        }
-                    });
-                };
+                            }
+                        });
+                    };
 
-                $('#showOptions').on('singletap', function() {
+                    $('#showOptions').on('singletap', function() {
                     var trigger = this;
-                    $.UIPopover({
-                        title: 'Opciones',
-                        trigger: trigger,
-                        content: optionsContent,
-                        callback: function() {
-                            popoverEventHandler();
-                        }
+                        $.UIPopover({
+                            title: 'Opciones',
+                            trigger: trigger,
+                            content: optionsContent,
+                            callback: function() {
+                                popoverEventHandler();
+                            }
                     });
-                });
+                });*/
 
                 $("#loginFacebook").on("singletap", function(){
                     login();
@@ -848,46 +948,104 @@
                     $("#formUpdate").submit();
                 });
 
+                $("#goToProfile").on("click", function () {
+                    goToProfile();
+                });
+
+                $("#signOut").on("click", function(){
+                    //$.UIPopoverClose();
+
+                    window.localStorage.removeItem("user");
+                    window.localStorage.removeItem("codeBidi");
+                        //logout();
+                    $("#dashboard").children().remove();
+                    $("#avatar").children().remove();
+                    $("#profile").children().remove();
+                    $("#avatarDone").unbind();
+                    $.UIGoBackToArticle("#main");
+
+                });
+
+                $('.toggle-menu').jPushMenu({
+                    closeOnClickLink: false
+                });
+
 
             });
         </script>
+        <style type="text/css">
+            section{
+                background: transparent !important;
+            }
+            #global-nav{
+                background-color: #1974c1 !important;
+            }
+        </style>
+
     </head>
-
-    <body style="display: none">
-        <nav>
-            <h1>BarrioOS</h1>
-        </nav>
+    <body  id="index" style="display: none">
+        <!--
+        /
+        /  MAIN PAGE
+        /
+        -->
         <article id="main">
-        <section>
-            <div class="grid center gutter-5">
-                <div class="col flex-8">
+            <section class="index">
+                <!--<div class="grid center gutter-5">
+                    <div class="col flex-8">
 
-                    <p>Bienvenidos a BarrioOS</p>
+                        <p>Bienvenidos a BarrioOS</p>
 
-                    <div class='horizontal centered' >
-                        <button id="goTologin" class="actionBtn">Iniciar Sesion</button>
+                        <div class='horizontal centered' >
+                            <button id="goTologin" class="actionBtn">Iniciar Sesion</button>
+                        </div>
+
+                        <div class='horizontal centered'>
+                            <button id="goToSignup" class="secondBtn">Registrarse</button>
+                        </div>
+                        <div class='horizontal centered'>
+                            <button id="loginFacebook" class="btn-facebook">
+                                <i class="ion-social-facebook"></i> Inicia con Facebook
+                            </button>
+                        </div>
                     </div>
-
-                    <div class='horizontal centered'>
-                        <button id="goToSignup" class="secondBtn">Registrarse</button>
-                    </div>
-                    <div class='horizontal centered'>
-                        <button id="loginFacebook" class="btn-facebook">
-                            <i class="ion-social-facebook"></i> Inicia con Facebook
-                        </button>
+                </div> -->
+                <div class="text-center">
+                    <img src="images/barrioos-vertical.png" alt="BarrioOS" width="150px" height="auto">
+                    <h3>Conecta con tu Barrio</h3>
+                </div>
+                <div class="index-fb">
+                    <div class="col-xs-12 text-center">
+                        <div class="row fb">
+                            <a id="loginFacebook" >
+                                    <i class="fa fa-facebook"></i>
+                                    <p>Registrate con Facebook <br>
+                                    <small>No publicaremos nada en tu muro</small></p>
+                            </a>
+                        </div>
+                      <a id="goTologin" class="btn btn-default btn-lg pull-left" >Ingresar</a>
+                      <a id="goToSignup" class="btn btn-default btn-lg pull-right">Registrar</a>
                     </div>
                 </div>
-            </div>
-        </section>
-    </article>
-        <nav class="next">
+            </section>
+        </article>
+        <!--<nav class="next">
             <button class="back">BarrioOS</button>
             <h1>Iniciar Sesión</h1>
             <button id="goToForgotPassword" >¿Contraseña?</button>
+        </nav> -->
+        <nav class="navbar navbar-default navbar-fixed-top next">
+            <div class="navbar-header">
+              <a class="navbar-toggle menu-left back" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <i style="color: #1974C1" class="fa fa-arrow-left"></i>
+            </a>
+              <h1 class="text-left title">Ingresar</h1>
+              <a class="navbar-brand" id="b-barrioos" ><img src="images/barrioos-iso.png" width="auto" height="50px" alt="BarrioOS"></a>
+            </div>
         </nav>
         <article id="login" class="next">
-            <section>
-                <h2>Inicia Sesión</h2>
+            <section class="ingresar">
+                <!--<h2>Inicia Sesión</h2>
                 <form id="formLogin" action="auth/login" method="POST" >
                     <h3 data-error="validation" class="hasError"></h3>
                     <ul ui-implements='form' class='list'>
@@ -911,17 +1069,54 @@
                     <div class='horizontal centered'>
                         <button type="submit" class="actionBtn" >Iniciar Sesión</button>
                     </div>
-                </form>
+                </form> -->
+                <div class="row">
+                    <div class="col-xs-10 col-xs-offset-1">
+                        <form id="formLogin" action="auth/login" method="POST" class="form-horizontal" >
+                          <h3 data-error="validation" class="hasError"></h3>
+                          <div class="form-group">
+                            <div class="col-xs-12">
+                              <input id="emailLogin" name="email" type="email" autocapitalize="off" autocorrect="off" placeholder="Correo" class="form-control" required>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-xs-12">
+                                <input id="passwordLogin" name="password" type="password" maxlength="16" autocapitalize="off" autocorrect="off" placeholder="Contraseña" class="form-control" required>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-xs-12 text-center submitregistro">
+                                <button style="margin:0px" type="submit" class="btn btn-default btn-lg btn-block" >Ingresar</button>
+                            </div>
+                          </div>
+                          <div style="padding-top:20px" class="form-group">
+                            <div class="col-xs-12 text-center">
+                                <a id="goToForgotPassword" style="color:white;font-size:18px;">¿Haz olvidado tu contraseña?</a>
+                            </div>
+                          </div>
+
+                        </form>
+                    </div>
+                </div>
             </section>
         </article>
-        <nav class="next">
+        <!--<nav class="next">
             <button class="back">BarrioOS</button>
             <h1>Registrarse</h1>
+        </nav> -->
+        <nav class="navbar navbar-default navbar-fixed-top next">
+            <div class="navbar-header">
+              <a class="navbar-toggle menu-left back" data-toggle="collapse" aria-expanded="false">
+                <i style="color: #1974C1" class="fa fa-arrow-left"></i>
+            </a>
+              <h1 class="text-left title" >Registro</h1>
+              <a class="navbar-brand" id="b-barrioos"><img src="images/barrioos-iso.png" width="auto" height="50px" alt="BarrioOS"></a>
+            </div>
         </nav>
         <article id="signup" class="next">
-            <section>
+            <section class="registro">
                 <p id="popupRegister" class="attentionGrapper"></p>
-                <h2>Registrate</h2>
+                <!--<h2>Registrate</h2>
                 <form id="formRegister" action="auth/register" method="POST">
                     <ul class='list' ui-implements='form'>
                     <li class="comp">
@@ -988,25 +1183,84 @@
                     </li>
                 </ul>
                     <button type="submit" class='action secondBtn'>Registrarse</button>
-                </form>
+                </form> -->
+                <div class="row">
+                    <div class="col-xs-10 col-xs-offset-1">
+                        <form id="formRegister" action="auth/register" method="POST" class="form-horizontal">
+                            <div class="form-group">
+                              <div class="col-xs-12">
+                                <input id="nameSignup" name="first_name" type="text" autocapitalize="words" autocorrect="off" placeholder="Nombre de Pila" class="form-control" required>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="col-xs-12">
+                                <input id="emailSignup" name="email" type="email" autocapitalize="off" autocorrect="off" pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" title="example@dominio.com" class="form-control" placeholder="Correo" required>
+                              </div>
+                            </div>
+                          <div class="form-group">
+                            <div class="col-xs-12">
+                              <input id="emailSignupRe" name="email_confirmation" type="email" pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" title="example@dominio.com" autocapitalize="off" autocorrect="off" class="form-control" placeholder="Repetir Correo" required>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-xs-12">
+                              <input id="passwordSignup" name="password" type="password" maxlength="16" autocapitalize="off" autocorrect="off" class="form-control" placeholder="Contraseña" required>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-xs-12">
+                              <input id="passwordSignupRe" name="password_confirmation" maxlength="16" type="password" autocapitalize="off" autocorrect="off" class="form-control" placeholder="Repetir Contraseña" required>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-xs-12">
+                              <input id="postalCodeSignup" name="postal_code" type="text" maxlength="5" pattern="^\d+$" title="Solo números" autocapitalize="off" autocorrect="off" class="form-control" placeholder="Código Postal" required>
+                            </div>
+                          </div>
+
+                          <div class="checkbox">
+                            <label>
+                              Al Registrarse, aceptas los <a href="">términos y condiciones</a> y la <a href="">política de privacidad</a>
+                            </label>
+                          </div>
+
+                          <div class="form-group">
+                            <div class="col-xs-12 text-center submitregistro">
+                              <button type="submit" class="btn btn-default btn-lg btn-block">Registrar</button>
+                            </div>
+                          </div>
+                        </form>
+                    </div>
+                </div>
             </section>
         </article>
-        <nav>
+        <!--<nav>
             <button id="avatarBack" class="back"></button>
             <h1>Seleccionar Avatar</h1>
             <button id="avatarDone">Hecho</button>
+        </nav> -->
+        <nav style="border-color: transparent" class="navbar navbar-default navbar-fixed-top next">
+            <div class="navbar-header">
+                <a id="avatarBack" class="navbar-toggle menu-left back" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <i     style="color: #1974C1;" class="fa fa-arrow-left"></i>
+                </a>
+              <h1 class="text-left title">Tu Imagen</h1>
+              <a class="navbar-brand" id="b-barrioos" ><img src="images/barrioos-iso.png" id="logo" width="auto" height="50px" alt="BarrioOS"></a>
+            </div>
         </nav>
-        <article id="avatar">
-
-
-
+        <article id="avatar" style="background-color:white !important; z-index:0">
         </article>
-        <nav class="next">
-            <button class="back">Iniciar</button>
-            <h1>Recuperar Contraseña</h1>
+        <nav class="navbar navbar-default navbar-fixed-top next">
+            <div class="navbar-header">
+              <a class="navbar-toggle menu-left back" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <i style="color: #1974C1" class="fa fa-arrow-left"></i>
+            </a>
+              <h1 style="font-size: 29px;" class="text-left title">Recuperar Contraseña</h1>
+              <a class="navbar-brand" id="b-barrioos" ><img src="images/barrioos-iso.png" width="auto" height="50px" alt="BarrioOS"></a>
+            </div>
         </nav>
         <article id="forgotPassword" class="next">
-            <section>
+            <!--<section>
                 <p id="popupRecover" class="attentionGrapper"></p>
                 <h2>Solicita tu contraseña</h2>
                 <form id="formRecover" action="auth/recover" method="POST">
@@ -1025,28 +1279,88 @@
                         <button type="submit" id="recoverExecute" class="actionBtn" >Recuperar</button>
                     </div>
                 </form>
+            </section>-->
+            <section class="ingresar">
+                <div class="row">
+                    <div class="col-xs-10 col-xs-offset-1">
+                        <form id="formRecover" action="auth/recover" method="POST" class="form-horizontal" >
+                          <div class="form-group">
+                            <div class="col-xs-12">
+                              <input id="emailRecover" name="email" type="email" autocapitalize="off" autocorrect="off" class="form-control" placeholder="Email" required>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-xs-12 text-center submitregistro">
+                                <button id="recoverExecute" style="margin:0px" type="submit" class="btn btn-default btn-lg btn-block" >Recuperar</button>
+                            </div>
+                          </div>
+                        </form>
+                    </div>
+                </div>
             </section>
         </article>
-
-        <nav class="next">
+        <!--<nav class="next">
             <h1>BarrioOS Inicio</h1>
             <button class='show-popover button' id="showOptions">opciones</button>
+        </nav> -->
+        <nav style="border-color: transparent" class="navbar navbar-default navbar-fixed-top">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle toggle-menu menu-left jPushMenuBtn" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+              <h1 class="text-left title">Tarjeta</h1>
+              <a class="navbar-brand" id="b-barrioos" href="index.html"><img src="images/barrioos-iso.png" id="logo" width="auto" height="50px" alt="BarrioOS"></a>
+            </div>
+            <div style="height:1200px; top: 53px;" class="collapse navbar-collapse cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="bs-example-navbar-collapse-1">
+
+              <ul class="nav navbar-nav navbar-left">
+                  <li><a href="#" >Grupo</a></li>
+                  <li><a href="#" >Chat</a></li>
+                  <li id="goToProfile" ><a>Perfil</a></li>
+                  <li id="signOut" ><a>Cerrar Sesión</a></li>
+              </ul>
+            </div>
         </nav>
-        <article id="dashboard">
+        <article id="dashboard" style="background-color:white !important; z-index:0">
 
         </article>
-        <nav>
+        <nav style="border-color: transparent" class="navbar navbar-default navbar-fixed-top next">
+            <div class="navbar-header">
+              <a class="navbar-toggle menu-left back" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <i style="color: #1974C1" class="fa fa-arrow-left"></i>
+            </a>
+              <h1 class="text-left title">Tú Código</h1>
+              <a class="navbar-brand" id="b-barrioos" ><img src="images/barrioos-iso.png" width="auto" height="50px" alt="BarrioOS"></a>
+            </div>
+        </nav>
+        <article id="qrCode" class="next" style="background-color:white !important; z-index:0" >
+
+        </article>
+        <!--<nav>
             <button class='back' id="cancelUpdate" >Cancelar</button>
             <h1>Perfil</h1>
             <button class='done align-flush' id="executeUpdate" >Guardar</button>
+        </nav> -->
+        <nav style="border-color: transparent" class="navbar navbar-default navbar-fixed-top">
+            <div class="navbar-header">
+                <a class="navbar-toggle menu-left back" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <i style="color: #1974C1;" class="fa fa-arrow-left"></i>
+                </a>
+              <h1 class="text-left title">Pérfil</h1>
+              <a class="navbar-brand" id="b-barrioos" href="index.html"><img src="images/barrioos-iso.png" id="logo" width="auto" height="50px" alt="BarrioOS"></a>
+            </div>
         </nav>
-        <article id="profile">
+        <article id="profile" style="background-color:white !important; z-index:0">
 
         </article>
 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/facebookConnectPlugin.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script src="js/push-menu.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
@@ -1212,5 +1526,11 @@
             }
 
         </script>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/responsive.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/menu.css">
+
     </body>
 </html>
