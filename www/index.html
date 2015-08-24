@@ -353,7 +353,7 @@
                             });
 
                             $.ajax({
-                                url: "http://des.barrioosger.com/api/users/me/avatar",
+                                url: "http://www.proyectodes.net/api/users/me/avatar",
                                 type: "POST",
                                 data: { avatar: IMAGE_DATA.toString() },
                                 beforeSend:function(){
@@ -404,7 +404,7 @@
                 var doAjax = function(options){
                     var user = JSON.parse(window.localStorage.getItem('user'));
 
-                    var url = "http://des.barrioosger.com/api/";
+                    var url = "http://www.proyectodes.net/api/";
 
                     if(user){
                         $.ajaxSetup({
