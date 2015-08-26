@@ -271,15 +271,36 @@
                             },
                             success:function(response){
 
+
+
                                 $('.popup').UIPopupClose();
 
-                                showPopup('Exito al actualizar tu información' ,
+
+                                if(typeof response === "string"){
+                                    response = JSON.parse(response);
+                                }
+
+                                if(response.status_code == 422)
+                                {
+                                    var errors = response.errors;
+                                    var $form = $("#formUpdate");
+                                    $.each(errors, function(key, value) {
+                                        var sel = $form.find("span[data-error='"+ key +"']");
+                                        $(sel).html(value);
+                                        $(sel).parent().addClass('hasError');
+                                    });
+                                }else{
+                                    showPopup('Exito al actualizar tu información' ,
                                         'Haz actualizado tu información correctamente',
                                         'Hecho',
                                         '',
                                         'popupUpdate');
 
-                                window.localStorage.setItem("user", JSON.stringify(response));
+                                    window.localStorage.setItem("user", JSON.stringify(response));
+                                }
+
+
+
                             },
                             error:function(response){
                                 $('.popup').UIPopupClose();
@@ -353,7 +374,7 @@
                             });
 
                             $.ajax({
-                                url: "http://www.proyectodes.net/api/users/me/avatar",
+                                url: "http://des.barriosger.com/api/users/me/avatar",
                                 type: "POST",
                                 data: { avatar: IMAGE_DATA.toString() },
                                 beforeSend:function(){
@@ -404,6 +425,7 @@
                 var doAjax = function(options){
                     var user = JSON.parse(window.localStorage.getItem('user'));
 
+                    //var url = "http://des.barrioosger.com/api/";
                     var url = "http://www.proyectodes.net/api/";
 
                     if(user){
@@ -475,12 +497,25 @@
 
                             $('.popup').UIPopupClose();
 
-                            $("#formLogin")[0].reset();
-                            window.localStorage.setItem("user", JSON.stringify(response));
 
-                            goToDashboard();
+                            if(typeof response === "string"){
+                                response = JSON.parse(response);
+                            }
+
+                            if(response.status_code == 403){
+                                var sel = $("#formLogin").find("h3[data-error='validation']");
+                                $(sel).html("Su correo o contraseña son invalidos");
+                            }
+                            else{
+                               $("#formLogin")[0].reset();
+                                window.localStorage.setItem("user", JSON.stringify(response));
+                                goToDashboard();
+                            }
+
+
                         },
                         error:function(response){
+
                             $('.popup').UIPopupClose();
                             if(response.responseJSON.status_code == 403){
                                 var sel = $("#formLogin").find("h3[data-error='validation']");
@@ -519,11 +554,28 @@
 
                         },
                         success:function(response){
-                            $("#formRegister")[0].reset();
-                            $('.popup').UIPopupClose();
-                            window.localStorage.setItem("user", JSON.stringify(response));
-                            goToAvatar();
 
+                            $('.popup').UIPopupClose();
+
+                            if(typeof response === "string"){
+                                response = JSON.parse(response);
+                            }
+
+
+                            if(response.status_code == 422){
+                                var errors = response.errors;
+                                var $form = $("#formRegister");
+                                $.each(errors, function(key, value) {
+                                    var sel = $form.find("span[data-error='"+ key +"']");
+                                    $(sel).html(value);
+                                    $(sel).parent().addClass('hasError');
+                                });
+                            }else{
+                                $("#formRegister")[0].reset();
+                                $('.popup').UIPopupClose();
+                                window.localStorage.setItem("user", JSON.stringify(response));
+                                goToAvatar();
+                            }
                         },
                         error:function(response){
 
@@ -566,13 +618,29 @@
 
                             $('.popup').UIPopupClose();
 
-                            $('#formRecover')[0].reset();
+                            if(typeof response === "string"){
+                                response = JSON.parse(response);
+                            }
 
-                            showPopup('Exito al enviar la solicitud' ,
+                            if(response.status_code == 404){
+
+                                var $form = $("#formRecover");
+                                var sel = $form.find("span[data-error='email']");
+                                $(sel).html("Este correo no se encuentra");
+                                $(sel).parent().addClass('hasError');
+
+                            }
+                            else{
+                                $('#formRecover')[0].reset();
+
+                                showPopup('Exito al enviar la solicitud' ,
                                     'Un correo de recuperación ha sido enviado a tu email',
                                     'Hecho',
                                     '',
                                     'popupRecover');
+
+                            }
+
                         },
                         error:function(response){
 
