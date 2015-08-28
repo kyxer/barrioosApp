@@ -40,7 +40,7 @@
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i></h1>
-                        <h4>[[= data.rating  ]]</h4>
+                        <h4>[[= data.raiting  ]]</h4>
                     </div>
                 </div>
                 <div style="display: none" id="containerCodeBidi" class="col-xs-12 text-center">
@@ -374,7 +374,7 @@
                             });
 
                             $.ajax({
-                                url: "http://des.barriosger.com/api/users/me/avatar",
+                                url: "http:///www.proyectodes.net/api/users/me/avatar",
                                 type: "POST",
                                 data: { avatar: IMAGE_DATA.toString() },
                                 beforeSend:function(){
@@ -425,8 +425,8 @@
                 var doAjax = function(options){
                     var user = JSON.parse(window.localStorage.getItem('user'));
 
-                    //var url = "http://des.barrioosger.com/api/";
-                    var url = "http://www.proyectodes.net/api/";
+                    var url = "http://des.barrioosger.com/api/";
+                    //var url = "http://www.proyectodes.net/api/";
 
                     if(user){
                         $.ajaxSetup({
@@ -508,6 +508,8 @@
                             }
                             else{
                                $("#formLogin")[0].reset();
+
+                                console.log(response);
                                 window.localStorage.setItem("user", JSON.stringify(response));
                                 goToDashboard();
                             }
