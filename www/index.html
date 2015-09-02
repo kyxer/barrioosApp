@@ -122,7 +122,7 @@
             <section class="qr-sec">
                 <div class="row">
                     <div id="avatarContainer" class="col-xs-12 text-center">
-                        <img src="[[= data.avatar_standar  ]]" alt="Persona" class="img-circle margin">
+                        <img src="[[= data.avatar_standar  ]]" alt="Persona" class="img-circle margin" width="150" height="150">
                     </div>
                     <div class="col-xs-12 text-center">
                             <a id="avatarButton" class="btn btn-primary btn-lg">Seleccionar Avatar</a>
@@ -1152,7 +1152,7 @@
 
                             IMAGE_DATA=evt.target.result;
                             $("#avatarContainer").empty();
-                            $("#avatarContainer").html("<img src='"+IMAGE_DATA+"' class='img-circle margin'>");
+                            $("#avatarContainer").html("<img src='"+IMAGE_DATA+"' class='img-circle margin' height='150' width='150' >");
 
 
                         };
