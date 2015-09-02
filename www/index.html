@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="row qr">
-                    <div class="col-xs-5">
+                    <div class="col-xs-5" id="dashboardImg">
                         <img src="[[= data.avatar_standar  ]]" alt="[[= data.first_name  ]]" class="img-circle"  style="margin-top:2vh;">
                     </div>
                     <div class="col-xs-7">
@@ -122,28 +122,13 @@
             <section class="qr-sec">
                 <div class="row">
                     <div id="avatarContainer" class="col-xs-12 text-center">
-                            <img src="[[= data.avatar_standar  ]]" alt="Persona" class="img-circle margin">
+                        <img src="[[= data.avatar_standar  ]]" alt="Persona" class="img-circle margin">
                     </div>
                     <div class="col-xs-12 text-center">
                             <a id="avatarButton" class="btn btn-primary btn-lg">Seleccionar Avatar</a>
                     </div>
                 </div>
             </section>
-            <!--<section>
-                <div class="grid center gutter-5">
-                    <div id="avatarContainer" class="col flex-10">
-                        <img src='[[= data.avatar_standar  ]]' height="150" />
-                    </div>
-                </div>
-                <div class="grid center gutter-5">
-                    <div class="col flex-10">
-                            <div class='horizontal centered'>
-                                <button id="avatarButton"> Seleccionar Avatar </button>
-                            </div>
-
-                    </div>
-                </div>
-            </section> -->
         </script>
         <script id="qrCodeTemplate" type="text/x-template">
             <section class="qr-sec">
@@ -184,9 +169,7 @@
                 var myQrCodeTmpl = $.template($("#qrCodeTemplate").text());
 
                 goToDashboard = function(){
-
                     $.UIGoToArticle('#dashboard');
-
                     if($("#dashboard").text().trim()!="")
                         return;
 
@@ -271,10 +254,7 @@
                             },
                             success:function(response){
 
-
-
                                 $('.popup').UIPopupClose();
-
 
                                 if(typeof response === "string"){
                                     response = JSON.parse(response);
@@ -350,6 +330,7 @@
                     });
 
                     $('#avatarDone').on('singletap', function (){
+
                         if(GLOBAL_VAR_AVATAR_DONE == 0)
                             return;
                         GLOBAL_VAR_AVATAR_DONE = 0;
@@ -384,8 +365,7 @@
                                 },
                                 success:function(response){
                                     GLOBAL_VAR_AVATAR_DONE = 1;
-                                    $('#dashboardImg').html("<img src='" + IMAGE_DATA + "' height='150' width='150' />")
-
+                                    $('#dashboardImg').html("<img src='" + IMAGE_DATA + "' class='img-circle'  style='margin-top:2vh;' />")
 
                                     IMAGE_DATA = undefined;
 
@@ -764,7 +744,6 @@
 
     </head>
     <body  id="index" style="display: none">
-
         <!--
         /
         /  MAIN PAGE
@@ -935,7 +914,7 @@
               <a class="navbar-toggle menu-left back" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <i style="color: #1974C1" class="fa fa-arrow-left"></i>
             </a>
-              <h1 style="font-size: 25px;" class="text-left title">Recuperar Contraseña</h1>
+              <h1 style="font-size: 18px; line-height: 2;" class="text-left title">Recuperar Contraseña</h1>
               <a class="navbar-brand b-barrioos" ><img src="images/barrioos-iso.png" width="auto" height="50px" alt="BarrioOS"></a>
             </div>
         </nav>
@@ -980,8 +959,8 @@
                 <ul style="width:215px" class="nav navbar-nav navbar-left">
                   <li><a>Grupo</a></li>
                   <li><a>Chat</a></li>
-                  <li id="goToProfile" ><a>Perfil</a></li>
-                  <li id="signOut" ><a>Cerrar Sesión</a></li>
+                  <li><a id="goToProfile" >Perfil</a></li>
+                  <li><a id="signOut" >Cerrar Sesión</a></li>
               </ul>
             </div>
         </nav>
@@ -1172,7 +1151,8 @@
                         reader.onloadend = function(evt) {
 
                             IMAGE_DATA=evt.target.result;
-                            $("#avatarContainer").html("<img src='" + IMAGE_DATA + "' class='img-circle margin' />");
+                            $("#avatarContainer").empty();
+                            $("#avatarContainer").html("<img src='"+IMAGE_DATA+"' class='img-circle margin'>");
 
 
                         };
